@@ -1,4 +1,4 @@
-package com.gmail.mosoft521.se.entity;
+package com.gmail.mosoft521.se.book.entity;
 
 public class User {
     private Integer id;

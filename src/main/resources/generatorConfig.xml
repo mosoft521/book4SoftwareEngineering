@@ -23,7 +23,7 @@
             <property name="forceBigDecimals" value="false"/>
         </javaTypeResolver>
 
-        <javaModelGenerator targetPackage="com.gmail.mosoft521.se.entity" targetProject="D:\ws_ij_se\book4SoftwareEngineering\src\main\java">
+        <javaModelGenerator targetPackage="com.gmail.mosoft521.se.book.entity" targetProject="D:\ws_ij_se\book4SoftwareEngineering\src\main\java">
             <property name="enableSubPackages" value="true"/>
             <property name="trimStrings" value="true"/>
             <property name="" value=""/>
@@ -33,7 +33,7 @@
             <property name="enableSubPackages" value="true"/>
         </sqlMapGenerator>
 
-        <javaClientGenerator type="XMLMAPPER" targetPackage="com.gmail.mosoft521.se.dao" targetProject="D:\ws_ij_se\book4SoftwareEngineering\src\main\java">
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.gmail.mosoft521.se.book.dao" targetProject="D:\ws_ij_se\book4SoftwareEngineering\src\main\java">
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
 

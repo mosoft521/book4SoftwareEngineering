@@ -1,10 +1,9 @@
-package com.gmail.mosoft521.se.dao;
+package com.gmail.mosoft521.se.book.dao;
 
-import com.gmail.mosoft521.se.entity.User;
-import com.gmail.mosoft521.se.entity.UserExample;
-import org.apache.ibatis.annotations.Param;
-
+import com.gmail.mosoft521.se.book.entity.User;
+import com.gmail.mosoft521.se.book.entity.UserExample;
 import java.util.List;
+import org.apache.ibatis.annotations.Param;
 
 public interface UserMapper {
     long countByExample(UserExample example);
