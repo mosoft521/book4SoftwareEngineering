@@ -1,32 +1,27 @@
 package com.gmail.mosoft521;
 
-import com.gmail.mosoft521.se.book.dao.UserMapper;
-import com.gmail.mosoft521.se.book.entity.User;
-import org.apache.ibatis.io.Resources;
-import org.apache.ibatis.session.SqlSession;
-import org.apache.ibatis.session.SqlSessionFactory;
-import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+import com.gmail.mosoft521.se.book.commons.BusinessException;
+import com.gmail.mosoft521.se.book.service.UserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import java.io.IOException;
-import java.io.InputStream;
-
-/**
- * Hello world!
- */
 public class App {
-    public static void main(String[] args) throws IOException {
-        System.out.println("Hello World!");
-        String resource = "mybatis/mybatis-config.xml";
-        InputStream inputStream = Resources.getResourceAsStream(resource);
-        SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+    private static Logger LOGGER = LoggerFactory.getLogger(App.class);
 
-        try (SqlSession session = sqlSessionFactory.openSession()) {
-            UserMapper mapper = session.getMapper(UserMapper.class);
-            User user = mapper.selectByPrimaryKey(1);
+    public static void main(String[] args) {
+        LOGGER.info("Hello World!");
 
-            System.out.println(user);
+        ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
+        UserService userService = context.getBean("userService", UserService.class);
+        try {
+            userService.login("admin", "admin");
+            LOGGER.info("login ok!");
+        } catch (BusinessException be) {
+            LOGGER.error("login error!");
         }
 
-        System.out.println("Byebye World!");
+        LOGGER.info("Byebye World!");
     }
 }
