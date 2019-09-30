@@ -24,6 +24,8 @@ import java.util.Vector;
  * 库存界面
  */
 public class RepertoryPanel extends CommonPanel {
+    private BookService bookService;
+    private InRecordService inRecordService;
 
     //入库记录列表的列集合
     Vector columns;
@@ -50,14 +52,11 @@ public class RepertoryPanel extends CommonPanel {
     //书本原有的数量
     JLabel repertorySize;
     JButton inButton;
-    private ApplicationContext context;
-    private BookService bookService;
-    private InRecordService inRecordService;
+
     //时间格式
     private SimpleDateFormat timeFormat = new SimpleDateFormat("yyyy-MM-dd HH-mm-ss");
 
     public RepertoryPanel(ApplicationContext context) {
-        this.context = context;
         this.bookService = context.getBean("bookService", BookService.class);
         this.inRecordService = context.getBean("inRecordService", InRecordService.class);
         initColumns();

@@ -28,10 +28,9 @@ import java.util.Vector;
  */
 public class SalePanel extends CommonPanel {
 
-    private ApplicationContext context;
     private BookService bookService;
     //销售记录的业务接口
-    SaleRecordService saleRecordService;
+    private SaleRecordService saleRecordService;
 
     //销售记录列
     Vector columns;
@@ -76,7 +75,6 @@ public class SalePanel extends CommonPanel {
     private SimpleDateFormat timeFormat = new SimpleDateFormat("yyyy-MM-dd HH-mm-ss");
 
     public SalePanel(ApplicationContext context) {
-        this.context = context;
         this.bookService = context.getBean("bookService", BookService.class);
         this.saleRecordService = context.getBean("saleRecordService", SaleRecordService.class);
         //设置列表数据

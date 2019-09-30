@@ -27,6 +27,9 @@ import java.util.Vector;
  * 书本界面
  */
 public class BookPanel extends CommonPanel {
+    private BookService bookService;
+    private BookTypeService bookTypeService;
+    private PublisherService publisherService;
 
     private final static String DEFAULT_File_Path = "upload/no_pic.gif";
     //种类下拉框
@@ -60,17 +63,12 @@ public class BookPanel extends CommonPanel {
     JTextField author;
     //查看大图的JFrame
     ImageFrame imageFrame;
-    private ApplicationContext context;
-    private BookService bookService;
-    private BookTypeService typeService;
-    private PublisherService concernService;
     private Vector columns;
 
     public BookPanel(ApplicationContext context) {
-        this.context = context;
         this.bookService = context.getBean("bookService", BookService.class);
-        this.typeService = context.getBean("bookTypeService", BookTypeService.class);
-        this.concernService = context.getBean("publisherService", PublisherService.class);
+        this.bookTypeService = context.getBean("bookTypeService", BookTypeService.class);
+        this.publisherService = context.getBean("publisherService", PublisherService.class);
         setViewDatas();
         initColumns();
 
@@ -479,7 +477,7 @@ public class BookPanel extends CommonPanel {
     //从数据库中获取全部的种类并添加到下拉框中
     private void addTypes() {
         //调用种类业务接口取得全部的种类
-        Collection<BookType> types = this.typeService.getAll();
+        Collection<BookType> types = this.bookTypeService.getAll();
         for (BookType type : types) {
             //typeComboBox是种类下拉框对象
             this.typeComboBox.addItem(makeType(type));
@@ -488,7 +486,7 @@ public class BookPanel extends CommonPanel {
 
     //从数据库中获取全部的出版社并添加到下拉框中
     private void addConcerns() {
-        Collection<Publisher> concers = this.concernService.getAll();
+        Collection<Publisher> concers = this.publisherService.getAll();
         for (Publisher c : concers) {
             this.concernComboBox.addItem(makeConcern(c));
         }

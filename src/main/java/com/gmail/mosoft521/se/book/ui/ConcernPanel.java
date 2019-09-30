@@ -18,6 +18,7 @@ import java.util.Vector;
  * 出版社的JPanel对象
  */
 public class ConcernPanel extends CommonPanel {
+    private PublisherService publisherService;
 
     //清空按钮
     JButton clearButton;
@@ -37,13 +38,10 @@ public class ConcernPanel extends CommonPanel {
     JButton queryButton;
     //根据名称查询的输入框
     JTextField queryName;
-    private ApplicationContext context;
-    private PublisherService service;
     private Vector columns;
 
     public ConcernPanel(ApplicationContext context) {
-        this.context = context;
-        this.service = context.getBean("publisherService", PublisherService.class);
+        this.publisherService = context.getBean("publisherService", PublisherService.class);
         //初始化列集合
         initColumns();
         //设置列表数据
@@ -175,7 +173,7 @@ public class ConcernPanel extends CommonPanel {
     //按名字模糊查询
     private void query() {
         String name = this.queryName.getText();
-        List<Publisher> concerns = service.query(name);
+        List<Publisher> concerns = publisherService.query(name);
         //转换数据格式
         Vector<Vector> datas = changeDatas(concerns);
         //设置数据
@@ -186,7 +184,7 @@ public class ConcernPanel extends CommonPanel {
 
     //查看一个出版社
     private void view(String id) {
-        Publisher c = service.find(Integer.valueOf(id));
+        Publisher c = publisherService.find(Integer.valueOf(id));
         //设置ID的JTextFiled（隐藏）
         this.concernId.setText(c.getId().toString());
         //设置出版社名称的文本框
@@ -215,7 +213,7 @@ public class ConcernPanel extends CommonPanel {
     private void add() {
         //获得界面中的值并封装成对象
         Publisher c = getConcern();
-        service.add(c);
+        publisherService.add(c);
         //重新读取数据
         setViewDatas();
         //刷新表单
@@ -229,7 +227,7 @@ public class ConcernPanel extends CommonPanel {
         //根据界面数据获得Concern对象
         Publisher c = getConcern();
         c.setId(Integer.valueOf(id));
-        service.update(c);
+        publisherService.update(c);
         //重新读取数据
         setViewDatas();
         //刷新列表
@@ -304,7 +302,7 @@ public class ConcernPanel extends CommonPanel {
      */
     public void setViewDatas() {
         //使用业务接口得到数据
-        List<Publisher> concerns = service.getAll();
+        List<Publisher> concerns = publisherService.getAll();
         //将数据转换成显示格式
         Vector<Vector> datas = changeDatas(concerns);
         //调用父类的setDatas方法

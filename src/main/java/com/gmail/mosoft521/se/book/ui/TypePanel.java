@@ -19,11 +19,9 @@ import java.util.Vector;
  * 种类管理界面
  */
 public class TypePanel extends CommonPanel {
-    private ApplicationContext context;
-
     //业务对象
     @Autowired
-    private BookTypeService service;
+    private BookTypeService bookTypeService;
 
     //列的集合
     private Vector columns;
@@ -50,8 +48,7 @@ public class TypePanel extends CommonPanel {
     private JButton queryButton;
 
     public TypePanel(ApplicationContext context) {
-        this.context = context;
-        this.service = context.getBean("bookTypeService", BookTypeService.class);
+        this.bookTypeService = context.getBean("bookTypeService", BookTypeService.class);
         //设置数据
         setViewDatas();
         //初始化列
@@ -139,7 +136,7 @@ public class TypePanel extends CommonPanel {
      * 实现父类方法, 查询数据库并返回对应的数据格式, 调用父类的setDatas方法设置数据集合
      */
     public void setViewDatas() {
-        List<BookType> types = service.getAll();
+        List<BookType> types = bookTypeService.getAll();
         Vector<Vector> datas = changeDatas(types);
         setDatas(datas);
     }
@@ -189,7 +186,7 @@ public class TypePanel extends CommonPanel {
     //查询方法
     private void query(String name) {
         //通过service方法查找结果
-        Vector<BookType> types = (Vector<BookType>) service.query(name);
+        Vector<BookType> types = (Vector<BookType>) bookTypeService.query(name);
         //转换数据格式
         Vector<Vector> datas = changeDatas(types);
         //设置数据
@@ -214,7 +211,7 @@ public class TypePanel extends CommonPanel {
         type.setTypeName(typeName);
         type.setTypeIntro(intro);
         //调用业务方法新增一个种类
-        type = service.add(type);
+        type = bookTypeService.add(type);
         //重新读取数据
         setViewDatas();
         //刷新列表
@@ -230,7 +227,7 @@ public class TypePanel extends CommonPanel {
         type.setId(Integer.parseInt(typeId));
         type.setTypeName(typeName);
         type.setTypeIntro(intro);
-        service.update(type);
+        bookTypeService.update(type);
         //重新读取数据
         setViewDatas();
         //刷新列表
@@ -251,7 +248,7 @@ public class TypePanel extends CommonPanel {
 
     //查看一个种类
     public void view(String id) {
-        BookType data = service.get(Integer.parseInt(id));
+        BookType data = bookTypeService.get(Integer.parseInt(id));
         typeId.setText(data.getId().toString());
         typeName.setText(data.getTypeName());
         intro.setText(data.getTypeIntro());

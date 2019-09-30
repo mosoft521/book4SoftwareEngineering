@@ -15,24 +15,20 @@ import java.awt.event.InputEvent;
  * 主界面的JFrame
  */
 public class MainFrame extends JFrame {
+    //业务接口
+    private BookTypeService bookTypeService;
+    private PublisherService publisherService;
+    private BookService bookService;
+    private SaleRecordService saleRecordService;
+    private InRecordService inRecordService;
 
     TypePanel typePanel;
     CommonPanel currentPanel;
-    private ApplicationContext context;
     private SalePanel salePanel;
     private RepertoryPanel repertoryPanel;
     private BookPanel bookPanel;
     private ConcernPanel concernPanel;
-    //业务接口
-    private BookTypeService typeService;
 
-    private PublisherService concernService;
-
-    private BookService bookService;
-
-    private SaleRecordService saleRecordService;
-
-    private InRecordService inRecordService;
 
     private Action sale = new AbstractAction("销售管理", new ImageIcon("images/sale.gif")) {
         public void actionPerformed(ActionEvent e) {
@@ -67,9 +63,8 @@ public class MainFrame extends JFrame {
     };
 
     public MainFrame(ApplicationContext context) {
-        this.context = context;
-        this.typeService = context.getBean("bookTypeService", BookTypeService.class);
-        this.concernService = context.getBean("publisherService", PublisherService.class);
+        this.bookTypeService = context.getBean("bookTypeService", BookTypeService.class);
+        this.publisherService = context.getBean("publisherService", PublisherService.class);
         this.bookService = context.getBean("bookService", BookService.class);
         this.saleRecordService = context.getBean("saleRecordService", SaleRecordService.class);
         this.inRecordService = context.getBean("inRecordService", InRecordService.class);
