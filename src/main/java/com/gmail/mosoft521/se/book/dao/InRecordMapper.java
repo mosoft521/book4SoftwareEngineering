@@ -4,7 +4,9 @@ import com.gmail.mosoft521.se.book.entity.InRecord;
 import com.gmail.mosoft521.se.book.entity.InRecordExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface InRecordMapper {
     long countByExample(InRecordExample example);
 

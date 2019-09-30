@@ -4,7 +4,9 @@ import com.gmail.mosoft521.se.book.entity.BookSaleRecord;
 import com.gmail.mosoft521.se.book.entity.BookSaleRecordExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface BookSaleRecordMapper {
     long countByExample(BookSaleRecordExample example);
 
