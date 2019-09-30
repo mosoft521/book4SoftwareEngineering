@@ -2,7 +2,7 @@ package com.gmail.mosoft521.se.book.service;
 
 import com.gmail.mosoft521.se.book.entity.BookType;
 
-import java.util.Collection;
+import java.util.List;
 
 /**
  * 书本种类业务接口
@@ -14,31 +14,31 @@ public interface BookTypeService {
      *
      * @return 返回种类值对象集合
      */
-    Collection<BookType> getAll();
+    List<BookType> getAll();
 
     /**
      * 根据种类名字模糊查找种类
      *
-     * @param name 种类名称
+     * @param typeName 种类名称
      * @return 查找的结果集
      */
-    Collection<BookType> query(String name);
+    List<BookType> query(String typeName);
 
     /**
      * 新增一个书本种类
      *
-     * @param type 需要新增的对象
+     * @param bookType 需要新增的对象
      * @return 新增后的种类对象
      */
-    BookType add(BookType type);
+    BookType add(BookType bookType);
 
     /**
      * 修改一个书本种类
      *
-     * @param type 需要修改的对象
+     * @param bookType 需要修改的对象
      * @return 修改后的对象
      */
-    BookType update(BookType type);
+    BookType update(BookType bookType);
 
     /**
      * 根据主键查找一个种类

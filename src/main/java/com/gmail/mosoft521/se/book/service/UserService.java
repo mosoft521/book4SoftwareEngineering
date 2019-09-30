@@ -7,8 +7,8 @@ public interface UserService {
     /**
      * 用户登录的方法, 如果登录失败，则抛出BusinessException
      *
-     * @param name
-     * @param password
+     * @param userName 用户名
+     * @param userPassword 密码
      */
-    void login(String name, String password);
+    void login(String userName, String userPassword);
 }

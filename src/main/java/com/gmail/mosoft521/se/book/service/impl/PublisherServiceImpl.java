@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Collection;
+import java.util.List;
 
 /**
  * 出版社业务实现类
@@ -20,7 +20,7 @@ public class PublisherServiceImpl implements PublisherService {
     private PublisherMapper publisherMapper;
 
     @Override
-    public Collection<Publisher> getAll() {
+    public List<Publisher> getAll() {
         return publisherMapper.selectByExample(null);
     }
 
@@ -30,24 +30,24 @@ public class PublisherServiceImpl implements PublisherService {
     }
 
     @Override
-    public Publisher add(Publisher c) {
-        int id = publisherMapper.insert(c);
+    public Publisher add(Publisher publisher) {
+        int id = publisherMapper.insert(publisher);
         return find(id);
     }
 
     @Override
-    public Publisher update(Publisher c) {
+    public Publisher update(Publisher publisher) {
         //调用DAO方法修改对象
-        int id = publisherMapper.updateByPrimaryKeySelective(c);
+        int id = publisherMapper.updateByPrimaryKeySelective(publisher);
         //重新查找该对象
         return find(id);
     }
 
     @Override
-    public Collection<Publisher> query(String name) {
+    public List<Publisher> query(String pubName) {
         PublisherExample publisherExample = new PublisherExample();
         PublisherExample.Criteria publisherExampleCriteria = publisherExample.createCriteria();
-        publisherExampleCriteria.andPubNameEqualTo(name);
+        publisherExampleCriteria.andPubNameEqualTo(pubName);
         return publisherMapper.selectByExample(publisherExample);
     }
 }

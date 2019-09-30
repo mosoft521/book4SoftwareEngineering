@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
-import java.util.Collection;
+import java.util.List;
 
 /**
  * 书本业务实现类
@@ -46,15 +46,15 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public Collection<BookVO> getAll() {
-        Collection<Book> result = bookMapper.selectByExample(null);
+    public List<BookVO> getAll() {
+        List<Book> result = bookMapper.selectByExample(null);
         //调用setAssociate方法设置关联的两个对象
         return setAssociate(result);
     }
 
     //设置关系对象
-    private Collection<BookVO> setAssociate(Collection<Book> result) {
-        Collection<BookVO> bookVOs = new ArrayList<BookVO>();
+    private List<BookVO> setAssociate(List<Book> result) {
+        List<BookVO> bookVOs = new ArrayList<>();
         //遍历结果集合，设置每一个书的对象
         for (Book book : result) {
             BookVO bookVO = new BookVO();
@@ -69,23 +69,23 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public Book add(BookVO book) {
-        int id = bookMapper.insert(book);
+    public BookVO add(BookVO bookVO) {
+        int id = bookMapper.insert(bookVO);
         return get(id);
     }
 
     @Override
-    public Book update(BookVO book) {
+    public BookVO update(BookVO book) {
         int id = bookMapper.updateByPrimaryKeySelective(book);
         return get(id);
     }
 
     @Override
-    public Collection<BookVO> find(String name) {
+    public List<BookVO> find(String bookName) {
         BookExample bookExample = new BookExample();
         BookExample.Criteria bookExampleCriteria = bookExample.createCriteria();
-        bookExampleCriteria.andBookNameLike(name);
-        Collection<Book> result = bookMapper.selectByExample(bookExample);
+        bookExampleCriteria.andBookNameLike(bookName);
+        List<Book> result = bookMapper.selectByExample(bookExample);
         return setAssociate(result);
     }
 }

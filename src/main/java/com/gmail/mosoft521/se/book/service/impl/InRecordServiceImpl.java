@@ -23,9 +23,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Date;
-import java.util.Vector;
+import java.util.List;
 
 /**
  * 入库记录业务实现类
@@ -49,55 +48,51 @@ public class InRecordServiceImpl implements InRecordService {
     private PublisherMapper publisherMapper;
 
     @Override
-    public Collection<InRecordVO> getAll(Date date) {
+    public List<InRecordVO> getAll(Date date) {
         //得到下一天
         Date nextDate = DateUtil.getNextDate(date);
-        //得到今天的日期, 格式为yyyy-MM-dd
-        String today = DateUtil.getDateString(date);
-        //得到明天的日期, 格式为yyyy-MM-dd
-        String tomorrow = DateUtil.getDateString(nextDate);
         InRecordExample inRecordExample = new InRecordExample();
         InRecordExample.Criteria inRecordExampleCriteria = inRecordExample.createCriteria();
         inRecordExampleCriteria.andRecordDateGreaterThanOrEqualTo(date);
         inRecordExampleCriteria.andRecordDateLessThanOrEqualTo(nextDate);
-        Collection<InRecord> records = inRecordMapper.selectByExample(inRecordExample);
-        Collection<InRecordVO> inRecordVOs = new ArrayList<>();
-        for (InRecord r : records) {
-            InRecordVO InRecordVO = new InRecordVO();
-            BeanUtils.copyProperties(r, InRecordVO);
-            processData(InRecordVO);
+        List<InRecord> inRecordList = inRecordMapper.selectByExample(inRecordExample);
+        List<InRecordVO> inRecordVOList = new ArrayList<>();
+        for (InRecord inRecord : inRecordList) {
+            InRecordVO inRecordVO = new InRecordVO();
+            BeanUtils.copyProperties(inRecord, inRecordVO);
+            processData(inRecordVO);
         }
-        return inRecordVOs;
+        return inRecordVOList;
     }
 
-    private InRecord processData(InRecordVO inRecordVO) {
+    private InRecordVO processData(InRecordVO inRecordVO) {
         BookInRecordExample bookInRecordExample = new BookInRecordExample();
         BookInRecordExample.Criteria bookInRecordExampleCriteria = bookInRecordExample.createCriteria();
         bookInRecordExampleCriteria.andInRecordIdEqualTo(inRecordVO.getId());
-        Collection<BookInRecord> bookInRecords = bookInRecordMapper.selectByExample(bookInRecordExample);
-        Collection<BookInRecordVO> bookInRecordVOs = new ArrayList<>();
+        List<BookInRecord> bookInRecordList = bookInRecordMapper.selectByExample(bookInRecordExample);
+        List<BookInRecordVO> bookInRecordVOList = new ArrayList<>();
         //设置记录中的每一本书
-        setBook(bookInRecords, bookInRecordVOs);
+        setBook(bookInRecordList, bookInRecordVOList);
         //设置入库记录中的书的入库记录
-        inRecordVO.setBookInRecordVOs((Vector<BookInRecordVO>) bookInRecordVOs);
+        inRecordVO.setBookInRecordVOs(bookInRecordVOList);
         //设置书名
-        inRecordVO.setBookNames(getBookNames(bookInRecordVOs));
+        inRecordVO.setBookNames(getBookNames(bookInRecordVOList));
         //设置书总数
-        inRecordVO.setAmount(getAmount(bookInRecordVOs));
+        inRecordVO.setAmount(getAmount(bookInRecordVOList));
         return inRecordVO;
     }
 
     //获取一次入库记录中所有书本的交易量
-    private int getAmount(Collection<BookInRecordVO> birs) {
+    private int getAmount(List<BookInRecordVO> bookInRecordVOList) {
         int result = 0;
-        for (BookInRecord br : birs) {
-            result += Integer.valueOf(br.getInSum());
+        for (BookInRecord bookInRecord : bookInRecordVOList) {
+            result += bookInRecord.getInSum();
         }
         return result;
     }
 
     //设置参数中的每一个BookInRecord的book属性
-    private void setBook(Collection<BookInRecord> bookInRecords, Collection<BookInRecordVO> bookInRecordVOs) {
+    private void setBook(List<BookInRecord> bookInRecords, List<BookInRecordVO> bookInRecordVOList) {
         for (BookInRecord bookInRecord : bookInRecords) {
             Book book = bookMapper.selectByPrimaryKey(bookInRecord.getBookId());
             BookVO bookVO = new BookVO();
@@ -111,40 +106,43 @@ public class InRecordServiceImpl implements InRecordService {
             BookInRecordVO bookInRecordVO = new BookInRecordVO();
             BeanUtils.copyProperties(bookInRecord, bookInRecordVO);
             bookInRecordVO.setBookVO(bookVO);
+            bookInRecordVOList.add(bookInRecordVO);
         }
     }
 
     //获取一次入库记录中所有书本的名字, 以逗号隔开
-    private String getBookNames(Collection<BookInRecordVO> birs) {
-        if (birs.size() == 0) return "";
-        StringBuffer result = new StringBuffer();
-        for (BookInRecordVO br : birs) {
+    private String getBookNames(List<BookInRecordVO> bookInRecordVOList) {
+        if (bookInRecordVOList.isEmpty()) return "";
+        StringBuilder result = new StringBuilder();
+        for (BookInRecordVO br : bookInRecordVOList) {
             BookVO bookVO = br.getBookVO();
-            result.append(bookVO.getBookName() + ", ");
+            result.append(bookVO.getBookName()).append(", ");
         }
         //去掉最后的逗号并返回
         return result.substring(0, result.lastIndexOf(","));
     }
 
     @Override
-    public InRecord get(int id) {
-        InRecord r = inRecordMapper.selectByPrimaryKey(id);
-        InRecordVO InRecordVO = new InRecordVO();
-        BeanUtils.copyProperties(r, InRecordVO);
-        return processData(InRecordVO);
+    public InRecordVO get(int id) {
+        InRecord inRecord = inRecordMapper.selectByPrimaryKey(id);
+        InRecordVO inRecordVO = new InRecordVO();
+        BeanUtils.copyProperties(inRecord, inRecordVO);
+        return processData(inRecordVO);
     }
 
     @Override
     public void save(InRecordVO inRecordVO) {
         int id = inRecordMapper.insert(inRecordVO);
-        for (BookInRecordVO br : inRecordVO.getBookInRecordVOs()) {
-            br.setInRecordId(id);
-            bookInRecordMapper.insert(br);
+        for (BookInRecordVO bookInRecordVO : inRecordVO.getBookInRecordVOs()) {
+            bookInRecordVO.setInRecordId(id);
+            bookInRecordMapper.insert(bookInRecordVO);
             //修改书的库存
-            int bookId = br.getBookVO().getId();
-            Book b = bookMapper.selectByPrimaryKey(bookId);
-            b.setRepertorySize(Long.valueOf(b.getRepertorySize() + br.getInSum()));
-            /*bookMapper.updateByExample(b);//todo:*/
+            int bookId = bookInRecordVO.getBookVO().getId();
+            Book bookOld = bookMapper.selectByPrimaryKey(bookId);
+            Book book4Update = new Book();
+            book4Update.setId(bookId);
+            book4Update.setRepertorySize(bookOld.getRepertorySize() + bookInRecordVO.getInSum());
+            bookMapper.updateByPrimaryKeySelective(book4Update);
         }
     }
 

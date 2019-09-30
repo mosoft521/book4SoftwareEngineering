@@ -2,14 +2,14 @@ package com.gmail.mosoft521.se.book.vo;
 
 import com.gmail.mosoft521.se.book.entity.InRecord;
 
-import java.util.Vector;
+import java.util.List;
 
 public class InRecordVO extends InRecord {
     //入库的总数量
     private int amount;
 
     //该入库记录所对应的书的入库记录
-    private Vector<BookInRecordVO> bookInRecordVOs;
+    private List<BookInRecordVO> bookInRecordVOs;
 
     //入库书的名称, 以逗号隔开
     private String bookNames;
@@ -25,11 +25,11 @@ public class InRecordVO extends InRecord {
         this.amount = amount;
     }
 
-    public Vector<BookInRecordVO> getBookInRecordVOs() {
+    public List<BookInRecordVO> getBookInRecordVOs() {
         return bookInRecordVOs;
     }
 
-    public void setBookInRecordVOs(Vector<BookInRecordVO> bookInRecordVOs) {
+    public void setBookInRecordVOs(List<BookInRecordVO> bookInRecordVOs) {
         this.bookInRecordVOs = bookInRecordVOs;
     }
 

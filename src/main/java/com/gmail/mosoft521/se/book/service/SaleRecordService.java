@@ -13,9 +13,9 @@ public interface SaleRecordService {
     /**
      * 新增一条销售记录
      *
-     * @param record
+     * @param saleRecordVO
      */
-    void saveRecord(SaleRecordVO record);
+    void saveRecord(SaleRecordVO saleRecordVO);
 
     /**
      * 根据日期获取该日期对应的销售记录

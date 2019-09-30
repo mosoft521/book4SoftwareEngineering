@@ -15,11 +15,11 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserMapper userMapper;
 
-    public void login(String name, String password) {
+    public void login(String userName, String userPassword) {
         UserExample userExample = new UserExample();
         UserExample.Criteria userExampleCriteria = userExample.createCriteria();
-        userExampleCriteria.andUserNameEqualTo(name);
-        userExampleCriteria.andUserPasswordEqualTo(password);
+        userExampleCriteria.andUserNameEqualTo(userName);
+        userExampleCriteria.andUserPasswordEqualTo(userPassword);
         long count = userMapper.countByExample(userExample);
         if (count == 0) {
             throw new BusinessException("用户名密码错误");

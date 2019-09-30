@@ -2,7 +2,7 @@ package com.gmail.mosoft521.se.book.service;
 
 import com.gmail.mosoft521.se.book.entity.Publisher;
 
-import java.util.Collection;
+import java.util.List;
 
 /**
  * 出版社业务接口
@@ -14,7 +14,7 @@ public interface PublisherService {
      *
      * @return
      */
-    Collection<Publisher> getAll();
+    List<Publisher> getAll();
 
     /**
      * 根据id查找一个出版社
@@ -27,24 +27,24 @@ public interface PublisherService {
     /**
      * 添加一个出版社
      *
-     * @param c
+     * @param publisher
      * @return
      */
-    Publisher add(Publisher c);
+    Publisher add(Publisher publisher);
 
     /**
      * 修改一个出版社
      *
-     * @param c
+     * @param publisher
      * @return
      */
-    Publisher update(Publisher c);
+    Publisher update(Publisher publisher);
 
     /**
      * 根据出版社名字模糊查找
      *
-     * @param name
+     * @param pubName
      * @return
      */
-    Collection<Publisher> query(String name);
+    List<Publisher> query(String pubName);
 }

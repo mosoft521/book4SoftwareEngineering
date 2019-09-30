@@ -1,11 +1,10 @@
 package com.gmail.mosoft521.se.book.service;
 
 
-import com.gmail.mosoft521.se.book.entity.InRecord;
 import com.gmail.mosoft521.se.book.vo.InRecordVO;
 
-import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 /**
  * 入库记录业务接口
@@ -15,9 +14,9 @@ public interface InRecordService {
     /**
      * 保存一条入库记录
      *
-     * @param r
+     * @param inRecordVO
      */
-    void save(InRecordVO r);
+    void save(InRecordVO inRecordVO);
 
     /**
      * 根据日期查找对应的入库记录
@@ -25,7 +24,7 @@ public interface InRecordService {
      * @param date
      * @return
      */
-    Collection<InRecordVO> getAll(Date date);
+    List<InRecordVO> getAll(Date date);
 
     /**
      * 根据id获得入库记录
@@ -33,5 +32,5 @@ public interface InRecordService {
      * @param id
      * @return
      */
-    InRecord get(int id);
+    InRecordVO get(int id);
 }

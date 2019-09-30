@@ -51,19 +51,15 @@ public class SaleRecordServiceImpl implements SaleRecordService {
     public List<SaleRecordVO> getAll(Date date) {
         //得到下一天
         Date nextDate = DateUtil.getNextDate(date);
-        //得到今天的日期, 格式为yyyy-MM-dd
-        String today = DateUtil.getDateString(date);
-        //得到明天的日期, 格式为yyyy-MM-dd
-        String tomorrow = DateUtil.getDateString(nextDate);
         SaleRecordExample saleRecordExample = new SaleRecordExample();
         SaleRecordExample.Criteria saleRecordExampleCriteria = saleRecordExample.createCriteria();
         saleRecordExampleCriteria.andRecordDateGreaterThanOrEqualTo(date);
         saleRecordExampleCriteria.andRecordDateLessThanOrEqualTo(nextDate);
         List<SaleRecord> records = saleRecordMapper.selectByExample(saleRecordExample);
         List<SaleRecordVO> saleRecordVOList = new ArrayList<>();
-        for (SaleRecord r : records) {
+        for (SaleRecord saleRecord : records) {
             SaleRecordVO saleRecordVO = new SaleRecordVO();
-            BeanUtils.copyProperties(r, saleRecordVO);
+            BeanUtils.copyProperties(saleRecord, saleRecordVO);
             processDatas(saleRecordVO);
             saleRecordVOList.add(saleRecordVO);
         }
@@ -71,12 +67,11 @@ public class SaleRecordServiceImpl implements SaleRecordService {
     }
 
     //处理一个SaleRecord, 设置它的书本销售记录属性和书本名字属性
-    private SaleRecordVO processDatas(SaleRecordVO r) {
+    private SaleRecordVO processDatas(SaleRecordVO saleRecordVO) {
         //查找该记录所对应的书的销售记录
-//        BookSaleRecordExample
         BookSaleRecordExample bookSaleRecordExample = new BookSaleRecordExample();
         BookSaleRecordExample.Criteria bookSaleRecordExampleCriteria = bookSaleRecordExample.createCriteria();
-        bookSaleRecordExampleCriteria.andSaleRecordIdEqualTo(r.getId());
+        bookSaleRecordExampleCriteria.andSaleRecordIdEqualTo(saleRecordVO.getId());
         List<BookSaleRecord> bookSaleRecordList = bookSaleRecordMapper.selectByExample(bookSaleRecordExample);
         List<BookSaleRecordVO> bookSaleRecordVOList = new ArrayList<>();
         for (BookSaleRecord bookSaleRecord : bookSaleRecordList) {
@@ -87,56 +82,56 @@ public class SaleRecordServiceImpl implements SaleRecordService {
         //设置结果集中的每一个book属性
         setBook(bookSaleRecordVOList);
         //设置SaleRecord对象中的书的销售记录集合
-        r.setBookSaleRecordVOList(bookSaleRecordVOList);
+        saleRecordVO.setBookSaleRecordVOList(bookSaleRecordVOList);
         //设置SaleRecord的书名集合
-        r.setBookNames(getBookNames(bookSaleRecordVOList));
+        saleRecordVO.setBookNames(getBookNames(bookSaleRecordVOList));
         //设置数量与总价
-        r.setAmount(getAmount(bookSaleRecordVOList));
-        r.setTotalPrice(getTotalPrice(bookSaleRecordVOList));
-        return r;
+        saleRecordVO.setAmount(getAmount(bookSaleRecordVOList));
+        saleRecordVO.setTotalPrice(getTotalPrice(bookSaleRecordVOList));
+        return saleRecordVO;
     }
 
     //获取一次交易中涉及的总价
-    private double getTotalPrice(List<BookSaleRecordVO> brs) {
+    private double getTotalPrice(List<BookSaleRecordVO> bookSaleRecordVOList) {
         double result = 0;
-        for (BookSaleRecordVO br : brs) {
+        for (BookSaleRecordVO bookSaleRecordVO : bookSaleRecordVOList) {
             //书本的交易量
-            int tradeSum = Integer.valueOf(br.getTradeSum());
+            int tradeSum = bookSaleRecordVO.getTradeSum();
             //书的单价
-            double bookPrice = Double.valueOf(br.getBookVO().getBookPrice());
+            double bookPrice = bookSaleRecordVO.getBookVO().getBookPrice();
             result += (bookPrice * tradeSum);
         }
         return result;
     }
 
     //获取一次交易中所有书本的交易量
-    private int getAmount(List<BookSaleRecordVO> brs) {
+    private int getAmount(List<BookSaleRecordVO> bookSaleRecordVOList) {
         int result = 0;
         //遍历书的交易记录，计算总价
-        for (BookSaleRecordVO br : brs) {
-            result += Integer.valueOf(br.getTradeSum());
+        for (BookSaleRecordVO bookSaleRecordVO : bookSaleRecordVOList) {
+            result += bookSaleRecordVO.getTradeSum();
         }
         return result;
     }
 
     //设置参数中的每一个BookSaleRecord的book属性
-    private void setBook(List<BookSaleRecordVO> brs) {
-        for (BookSaleRecordVO br : brs) {
+    private void setBook(List<BookSaleRecordVO> bookSaleRecordVOList) {
+        for (BookSaleRecordVO bookSaleRecordVO : bookSaleRecordVOList) {
             //调书本的数据访问层接口
-            Book book = bookMapper.selectByPrimaryKey(br.getBookId());
+            Book book = bookMapper.selectByPrimaryKey(bookSaleRecordVO.getBookId());
             BookVO bookVO = new BookVO();
             BeanUtils.copyProperties(book, bookVO);
-            br.setBookVO(bookVO);
+            bookSaleRecordVO.setBookVO(bookVO);
         }
     }
 
     //获取一次交易中所有书本的名字, 以逗号隔开
-    private String getBookNames(List<BookSaleRecordVO> brs) {
-        if (brs.size() == 0) return "";
-        StringBuffer result = new StringBuffer();
-        for (BookSaleRecordVO br : brs) {
-            Book book = br.getBookVO();
-            result.append(book.getBookName() + ", ");
+    private String getBookNames(List<BookSaleRecordVO> bookSaleRecordVOList) {
+        if (bookSaleRecordVOList.isEmpty()) return "";
+        StringBuilder result = new StringBuilder();
+        for (BookSaleRecordVO bookSaleRecordVO : bookSaleRecordVOList) {
+            Book book = bookSaleRecordVO.getBookVO();
+            result.append(book.getBookName()).append(", ");
         }
         //去掉最后的逗号并返回
         return result.substring(0, result.lastIndexOf(","));
@@ -144,30 +139,28 @@ public class SaleRecordServiceImpl implements SaleRecordService {
 
 
     @Override
-    public void saveRecord(SaleRecordVO record) {
+    public void saveRecord(SaleRecordVO saleRecordVO) {
         //遍历判断书的库存是否不够
-        for (BookSaleRecordVO r : record.getBookSaleRecordVOList()) {
-            int bookId = r.getBookVO().getId();
-            Book b = bookMapper.selectByPrimaryKey(bookId);
+        for (BookSaleRecordVO bookSaleRecordVO : saleRecordVO.getBookSaleRecordVOList()) {
+            int bookId = bookSaleRecordVO.getBookVO().getId();
+            Book book = bookMapper.selectByPrimaryKey(bookId);
             //当存库不够时,抛出异常
-            if (Integer.valueOf(r.getTradeSum()) >
-                    b.getRepertorySize()) {
-                throw new BusinessException(b.getBookName() + " 的库存不够");
+            if (bookSaleRecordVO.getTradeSum() > book.getRepertorySize()) {
+                throw new BusinessException(book.getBookName() + " 的库存不够");
             }
         }
         //先保存交易记录
-        int id = saleRecordMapper.insert(record);
+        int id = saleRecordMapper.insert(saleRecordVO);
         //再保存书的交易记录
-        for (BookSaleRecordVO saleRecordVO : record.getBookSaleRecordVOList()) {
+        for (BookSaleRecordVO bookSaleRecordVO : saleRecordVO.getBookSaleRecordVOList()) {
             //设置销售记录id
-            saleRecordVO.setSaleRecordId(id);
-            bookSaleRecordMapper.insert(saleRecordVO);
+            bookSaleRecordVO.setSaleRecordId(id);
+            bookSaleRecordMapper.insert(bookSaleRecordVO);
             //修改书的库存
-            int bookId = saleRecordVO.getBookVO().getId();
+            int bookId = bookSaleRecordVO.getBookVO().getId();
             Book bookOld = bookMapper.selectByPrimaryKey(bookId);
             //计算剩余的库存
-            long leave = bookOld.getRepertorySize() -
-                    saleRecordVO.getTradeSum();
+            long leave = bookOld.getRepertorySize() - bookSaleRecordVO.getTradeSum();
             //设置库存并将库存数保存到数据库
             Book book4Update = new Book();
             book4Update.setId(bookId);

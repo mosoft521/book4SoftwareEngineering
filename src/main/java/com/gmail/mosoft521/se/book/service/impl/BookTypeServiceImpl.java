@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Collection;
+import java.util.List;
 
 /**
  * 书本种类业务实现类
@@ -19,25 +19,24 @@ public class BookTypeServiceImpl implements BookTypeService {
     @Autowired
     private BookTypeMapper bookTypeMapper;
 
-    public Collection<BookType> query(String name) {
+    public List<BookType> query(String typeName) {
         BookTypeExample bookTypeExample = new BookTypeExample();
         BookTypeExample.Criteria bookTypeExampleCriteria = bookTypeExample.createCriteria();
-        bookTypeExampleCriteria.andTypeNameEqualTo(name);
+        bookTypeExampleCriteria.andTypeNameEqualTo(typeName);
         return bookTypeMapper.selectByExample(bookTypeExample);
     }
 
-    public Collection<BookType> getAll() {
+    public List<BookType> getAll() {
         return bookTypeMapper.selectByExample(null);
     }
 
-    public BookType add(BookType type) {
-        int id = bookTypeMapper.insert(type);
+    public BookType add(BookType bookType) {
+        int id = bookTypeMapper.insert(bookType);
         return get(id);
     }
 
-    public BookType update(BookType type) {
-        // TODO Auto-generated method stub
-        int id = bookTypeMapper.updateByPrimaryKeySelective(type);
+    public BookType update(BookType bookType) {
+        int id = bookTypeMapper.updateByPrimaryKeySelective(bookType);
         return get(id);
     }
 

@@ -1,10 +1,8 @@
 package com.gmail.mosoft521.se.book.service;
 
-
-import com.gmail.mosoft521.se.book.entity.Book;
 import com.gmail.mosoft521.se.book.vo.BookVO;
 
-import java.util.Collection;
+import java.util.List;
 
 /**
  * 书本业务接口
@@ -16,7 +14,7 @@ public interface BookService {
      *
      * @return
      */
-    Collection<BookVO> getAll();
+    List<BookVO> getAll();
 
     /**
      * 根据id获取书
@@ -29,18 +27,18 @@ public interface BookService {
     /**
      * 新增一本书
      *
-     * @param book
+     * @param bookVO
      * @return
      */
-    Book add(BookVO book);
+    BookVO add(BookVO bookVO);
 
     /**
      * 修改一本书
      *
-     * @param book
+     * @param bookVO
      * @return
      */
-    Book update(BookVO book);
+    BookVO update(BookVO bookVO);
 
     /**
      * 根据名称模糊查询
@@ -48,5 +46,5 @@ public interface BookService {
      * @param name
      * @return
      */
-    Collection<BookVO> find(String name);
+    List<BookVO> find(String bookName);
 }
