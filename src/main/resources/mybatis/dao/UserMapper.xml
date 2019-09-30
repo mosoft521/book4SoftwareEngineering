@@ -176,5 +176,4 @@
       USER_PASSWORD = #{userPassword,jdbcType=VARCHAR}
     where ID = #{id,jdbcType=INTEGER}
   </update>
-
 </mapper>

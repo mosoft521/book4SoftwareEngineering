@@ -66,30 +66,30 @@
         <!--        </table>-->
 
         <!--t_book, t_book_in_record, t_book_sale_record, t_book_type, t_in_record, t_publisher, t_sale_record, t_user-->
-<!--        <table schema="" tableName="T_USER" domainObjectName="User">
-            <generatedKey column="ID" sqlStatement="MySql" identity="true"/>
-        </table>-->
         <!--        <table schema="" tableName="common_xzqh_tree_path" domainObjectName="CommonXzqhTreePath">-->
         <!--        </table>-->
-        <table schema="" tableName="t_book" domainObjectName="Book">
-            <generatedKey column="ID" sqlStatement="MySql" identity="true"/>
-        </table>
-        <table schema="" tableName="t_book_in_record" domainObjectName="BookInRecord">
-            <generatedKey column="ID" sqlStatement="MySql" identity="true"/>
-        </table>
-        <table schema="" tableName="t_book_sale_record" domainObjectName="BookSaleRecord">
-            <generatedKey column="ID" sqlStatement="MySql" identity="true"/>
-        </table>
-        <table schema="" tableName="t_book_type" domainObjectName="BookType">
-            <generatedKey column="ID" sqlStatement="MySql" identity="true"/>
-        </table>
-        <table schema="" tableName="t_in_record" domainObjectName="InRecord">
-            <generatedKey column="ID" sqlStatement="MySql" identity="true"/>
-        </table>
-        <table schema="" tableName="t_publisher" domainObjectName="Publisher">
-            <generatedKey column="ID" sqlStatement="MySql" identity="true"/>
-        </table>
-        <table schema="" tableName="t_sale_record" domainObjectName="SaleRecord">
+<!--        <table schema="" tableName="t_book" domainObjectName="Book">-->
+<!--            <generatedKey column="ID" sqlStatement="MySql" identity="true"/>-->
+<!--        </table>-->
+<!--        <table schema="" tableName="t_book_in_record" domainObjectName="BookInRecord">-->
+<!--            <generatedKey column="ID" sqlStatement="MySql" identity="true"/>-->
+<!--        </table>-->
+<!--        <table schema="" tableName="t_book_sale_record" domainObjectName="BookSaleRecord">-->
+<!--            <generatedKey column="ID" sqlStatement="MySql" identity="true"/>-->
+<!--        </table>-->
+<!--        <table schema="" tableName="t_book_type" domainObjectName="BookType">-->
+<!--            <generatedKey column="ID" sqlStatement="MySql" identity="true"/>-->
+<!--        </table>-->
+<!--        <table schema="" tableName="t_in_record" domainObjectName="InRecord">-->
+<!--            <generatedKey column="ID" sqlStatement="MySql" identity="true"/>-->
+<!--        </table>-->
+<!--        <table schema="" tableName="t_publisher" domainObjectName="Publisher">-->
+<!--            <generatedKey column="ID" sqlStatement="MySql" identity="true"/>-->
+<!--        </table>-->
+<!--        <table schema="" tableName="t_sale_record" domainObjectName="SaleRecord">-->
+<!--            <generatedKey column="ID" sqlStatement="MySql" identity="true"/>-->
+<!--        </table>-->
+        <table schema="" tableName="T_USER" domainObjectName="User">
             <generatedKey column="ID" sqlStatement="MySql" identity="true"/>
         </table>
 
