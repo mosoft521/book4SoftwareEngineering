@@ -1,9 +1,9 @@
 package com.gmail.mosoft521.se.book.service;
 
-import com.gmail.mosoft521.se.book.entity.SaleRecord;
+import com.gmail.mosoft521.se.book.vo.SaleRecordVO;
 
-import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 /**
  * 销售业务接口
@@ -15,7 +15,7 @@ public interface SaleRecordService {
      *
      * @param record
      */
-    void saveRecord(SaleRecord record);
+    void saveRecord(SaleRecordVO record);
 
     /**
      * 根据日期获取该日期对应的销售记录
@@ -23,7 +23,7 @@ public interface SaleRecordService {
      * @param date
      * @return
      */
-    Collection<SaleRecord> getAll(Date date);
+    List<SaleRecordVO> getAll(Date date);
 
     /**
      * 根据id获取销售记录
@@ -31,6 +31,6 @@ public interface SaleRecordService {
      * @param id
      * @return
      */
-    SaleRecord get(int id);
+    SaleRecordVO get(int id);
 
 }
