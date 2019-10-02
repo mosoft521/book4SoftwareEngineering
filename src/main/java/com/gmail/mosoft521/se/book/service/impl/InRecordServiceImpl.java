@@ -75,7 +75,7 @@ public class InRecordServiceImpl implements InRecordService {
         //设置记录中的每一本书
         setBook(bookInRecordList, bookInRecordVOList);
         //设置入库记录中的书的入库记录
-        inRecordVO.setBookInRecordVOs(bookInRecordVOList);
+        inRecordVO.setBookInRecordVOList(bookInRecordVOList);
         //设置书名
         inRecordVO.setBookNames(getBookNames(bookInRecordVOList));
         //设置书总数
@@ -134,7 +134,7 @@ public class InRecordServiceImpl implements InRecordService {
     @Override
     public void save(InRecordVO inRecordVO) {
         inRecordMapper.insert(inRecordVO);
-        for (BookInRecordVO bookInRecordVO : inRecordVO.getBookInRecordVOs()) {
+        for (BookInRecordVO bookInRecordVO : inRecordVO.getBookInRecordVOList()) {
             bookInRecordVO.setInRecordId(inRecordVO.getId());
             bookInRecordVO.setBookId(bookInRecordVO.getBookVO().getId());
             bookInRecordMapper.insert(bookInRecordVO);

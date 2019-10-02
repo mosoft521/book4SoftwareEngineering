@@ -9,7 +9,7 @@ public class InRecordVO extends InRecord {
     private int amount;
 
     //该入库记录所对应的书的入库记录
-    private List<BookInRecordVO> bookInRecordVOs;
+    private List<BookInRecordVO> bookInRecordVOList;
 
     //入库书的名称, 以逗号隔开
     private String bookNames;
@@ -25,12 +25,12 @@ public class InRecordVO extends InRecord {
         this.amount = amount;
     }
 
-    public List<BookInRecordVO> getBookInRecordVOs() {
-        return bookInRecordVOs;
+    public List<BookInRecordVO> getBookInRecordVOList() {
+        return bookInRecordVOList;
     }
 
-    public void setBookInRecordVOs(List<BookInRecordVO> bookInRecordVOs) {
-        this.bookInRecordVOs = bookInRecordVOs;
+    public void setBookInRecordVOList(List<BookInRecordVO> bookInRecordVOList) {
+        this.bookInRecordVOList = bookInRecordVOList;
     }
 
     public String getBookNames() {
