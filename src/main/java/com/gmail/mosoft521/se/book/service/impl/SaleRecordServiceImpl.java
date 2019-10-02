@@ -155,6 +155,7 @@ public class SaleRecordServiceImpl implements SaleRecordService {
         for (BookSaleRecordVO bookSaleRecordVO : saleRecordVO.getBookSaleRecordVOList()) {
             //设置销售记录id
             bookSaleRecordVO.setSaleRecordId(saleRecordVO.getId());
+            bookSaleRecordVO.setBookId(bookSaleRecordVO.getBookVO().getId());
             bookSaleRecordMapper.insert(bookSaleRecordVO);
             //修改书的库存
             int bookId = bookSaleRecordVO.getBookVO().getId();

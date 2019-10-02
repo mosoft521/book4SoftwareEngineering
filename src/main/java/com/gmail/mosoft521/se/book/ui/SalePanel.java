@@ -117,8 +117,7 @@ public class SalePanel extends CommonPanel {
         //书列表
         Box downBox2 = new Box(BoxLayout.X_AXIS);
         this.bookSaleRecordDatas = new Vector();
-        DefaultTableModel bookModel = new DefaultTableModel(this.bookSaleRecordDatas,
-                this.bookSaleRecordColumns);
+        DefaultTableModel bookModel = new DefaultTableModel(this.bookSaleRecordDatas, this.bookSaleRecordColumns);
         this.bookSaleRecordTable = new CommonJTable(bookModel);
         //设置书本交易记录列表的样式
         setBookSaleRecordTableFace();
@@ -291,7 +290,11 @@ public class SalePanel extends CommonPanel {
             return;
         }
         SaleRecordVO r = new SaleRecordVO();
-        r.setRecordDate(new Date(this.recordDate.getText()));
+        try {
+            r.setRecordDate(timeFormat.parse(this.recordDate.getText()));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
         r.setBookSaleRecordVOList(this.bookSaleRecordDatas);
         try {
             saleRecordService.saveRecord(r);
@@ -420,7 +423,11 @@ public class SalePanel extends CommonPanel {
 
     //设置视图数据
     public void setViewDatas() {
-        List<SaleRecordVO> records = saleRecordService.getAll(new Date());
+        Date now = new Date();
+        now.setHours(0);
+        now.setMinutes(0);
+        now.setSeconds(0);
+        List<SaleRecordVO> records = saleRecordService.getAll(now);
         Vector<Vector> datas = changeDatas(records);
         setDatas(datas);
     }
