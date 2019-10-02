@@ -461,7 +461,12 @@ public class SalePanel extends CommonPanel {
         //得到书的交易记录
         SaleRecordVO record = saleRecordService.get(saleRecordId);
         //设置当前书本销售数据
-        this.bookSaleRecordDatas = (Vector<BookSaleRecordVO>) record.getBookSaleRecordVOList();
+        List<BookSaleRecordVO> bookSaleRecordVOList = record.getBookSaleRecordVOList();
+        Vector<BookSaleRecordVO> bookSaleRecordVOVector = new Vector<>();
+        for (BookSaleRecordVO bookSaleRecordVO : bookSaleRecordVOList) {
+            bookSaleRecordVOVector.add(bookSaleRecordVO);
+        }
+        this.bookSaleRecordDatas = bookSaleRecordVOVector;
         //刷新书本销售列表
         refreshBookSaleRecordTableData();
         this.saleRecordId.setText(record.getId().toString());

@@ -382,7 +382,12 @@ public class RepertoryPanel extends CommonPanel {
         //从数据库中查找
         InRecordVO r = inRecordService.get(id);
         //设置列表数据对应的集合
-        this.bookInRecords = (Vector<BookInRecordVO>) r.getBookInRecordVOList();
+        List<BookInRecordVO> bookInRecordVOList = r.getBookInRecordVOList();
+        Vector<BookInRecordVO> bookInRecordVOVector = new Vector<>();
+        for (BookInRecordVO bookInRecordVO : bookInRecordVOList) {
+            bookInRecordVOVector.add(bookInRecordVO);
+        }
+        this.bookInRecords = bookInRecordVOVector;
         //刷新书的入库记录列表
         refreshBookInRecordTableData();
         //设置当前查看记录的隐藏域id
