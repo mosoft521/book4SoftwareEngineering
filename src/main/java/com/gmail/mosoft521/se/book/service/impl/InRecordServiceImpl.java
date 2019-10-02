@@ -61,6 +61,7 @@ public class InRecordServiceImpl implements InRecordService {
             InRecordVO inRecordVO = new InRecordVO();
             BeanUtils.copyProperties(inRecord, inRecordVO);
             processData(inRecordVO);
+            inRecordVOList.add(inRecordVO);
         }
         return inRecordVOList;
     }

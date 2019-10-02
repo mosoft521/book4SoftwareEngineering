@@ -408,7 +408,11 @@ public class RepertoryPanel extends CommonPanel {
 
     //重新读取数据
     public void setViewDatas() {
-        List<InRecordVO> records = inRecordService.getAll(new Date());
+        Date now = new Date();
+        now.setHours(0);
+        now.setMinutes(0);
+        now.setSeconds(0);
+        List<InRecordVO> records = inRecordService.getAll(now);
         Vector<Vector> datas = changeDatas(records);
         setDatas(datas);
     }
