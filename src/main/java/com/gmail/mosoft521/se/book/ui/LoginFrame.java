@@ -72,7 +72,6 @@ public class LoginFrame extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 login();
             }
-
         });
     }
 
@@ -90,7 +89,6 @@ public class LoginFrame extends JFrame {
         } catch (Exception e) {
             showWarn(e.getMessage());
         }
-
     }
 
     //显示警告

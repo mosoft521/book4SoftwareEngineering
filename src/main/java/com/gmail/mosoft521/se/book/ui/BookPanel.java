@@ -416,8 +416,8 @@ public class BookPanel extends CommonPanel {
 
     //查看书本
     private void view() {
-        String id = getSelectId(getJTable());
-        BookVO book = bookService.get(Integer.parseInt(id));
+        Integer id = getSelectId(getJTable());
+        BookVO book = bookService.get(id);
         this.bookId.setText(book.getId().toString());
         this.bookName.setText(book.getBookName());
         this.price.setText(book.getBookPrice().toString());

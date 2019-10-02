@@ -80,10 +80,10 @@ public abstract class CommonPanel extends JPanel {
     }
 
     //给子类使用的方法, 用于获取一个列表的id列值
-    public String getSelectId(JTable table) {
+    public Integer getSelectId(JTable table) {
         int row = table.getSelectedRow();
         int column = table.getColumn("id").getModelIndex();
-        String id = (String) table.getValueAt(row, column);
+        Integer id = (Integer) table.getValueAt(row, column);
         return id;
     }
 

@@ -145,7 +145,7 @@ public class ConcernPanel extends CommonPanel {
                     //如果没有选中任何一行, 则返回
                     if (getJTable().getSelectedRowCount() != 1) return;
                     //调用父类的方法获得选择行的id
-                    String id = getSelectId(getJTable());
+                    Integer id = getSelectId(getJTable());
                     view(id);
                 }
             }
@@ -183,8 +183,8 @@ public class ConcernPanel extends CommonPanel {
     }
 
     //查看一个出版社
-    private void view(String id) {
-        Publisher c = publisherService.find(Integer.valueOf(id));
+    private void view(Integer id) {
+        Publisher c = publisherService.find(id);
         //设置ID的JTextFiled（隐藏）
         this.concernId.setText(c.getId().toString());
         //设置出版社名称的文本框

@@ -374,9 +374,9 @@ public class RepertoryPanel extends CommonPanel {
     //查看一入入库记录
     private void view() {
         //获得入库记录的id
-        String id = getSelectId(getJTable());
+        Integer id = getSelectId(getJTable());
         //从数据库中查找
-        InRecordVO r = inRecordService.get(Integer.parseInt(id));
+        InRecordVO r = inRecordService.get(id);
         //设置列表数据对应的集合
         this.bookInRecords = (Vector<BookInRecordVO>) r.getBookInRecordVOs();
         //刷新书的入库记录列表

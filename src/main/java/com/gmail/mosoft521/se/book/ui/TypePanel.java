@@ -151,7 +151,7 @@ public class TypePanel extends CommonPanel {
                     //如果没有选中任何一行, 则返回
                     if (getJTable().getSelectedRowCount() != 1) return;
                     //调用父类的方法获得选择行的id
-                    String id = getSelectId(getJTable());
+                    Integer id = getSelectId(getJTable());
                     view(id);
                 }
             }
@@ -247,8 +247,8 @@ public class TypePanel extends CommonPanel {
     }
 
     //查看一个种类
-    public void view(String id) {
-        BookType data = bookTypeService.get(Integer.parseInt(id));
+    public void view(Integer id) {
+        BookType data = bookTypeService.get(id);
         typeId.setText(data.getId().toString());
         typeName.setText(data.getTypeName());
         intro.setText(data.getTypeIntro());

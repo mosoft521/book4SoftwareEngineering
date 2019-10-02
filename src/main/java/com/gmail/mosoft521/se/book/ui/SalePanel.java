@@ -472,9 +472,9 @@ public class SalePanel extends CommonPanel {
 
     //查看一条销售记录
     private void view() {
-        String saleRecordId = getSelectId(getJTable());
+        Integer saleRecordId = getSelectId(getJTable());
         //得到书的交易记录
-        SaleRecordVO record = saleRecordService.get(Integer.parseInt(saleRecordId));
+        SaleRecordVO record = saleRecordService.get(saleRecordId);
         //设置当前书本销售数据
         this.bookSaleRecordDatas = (Vector<BookSaleRecordVO>) record.getBookSaleRecordVOList();
         //刷新书本销售列表
