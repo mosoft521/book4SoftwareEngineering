@@ -29,4 +29,16 @@ public class BookVO extends Book {
     public void setPublisher(Publisher publisher) {
         this.publisher = publisher;
     }
+
+    public boolean equals(Object obj) {
+        if (obj instanceof BookVO) {
+            BookVO b = (BookVO) obj;
+            return getId().equals(b.getId());
+        }
+        return false;
+    }
+
+    public String toString() {
+        return getBookName();
+    }
 }

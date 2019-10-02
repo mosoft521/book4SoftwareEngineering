@@ -15,6 +15,7 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -54,7 +55,7 @@ public class RepertoryPanel extends CommonPanel {
     JButton inButton;
 
     //时间格式
-    private SimpleDateFormat timeFormat = new SimpleDateFormat("yyyy-MM-dd HH-mm-ss");
+    private SimpleDateFormat timeFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
     public RepertoryPanel(ApplicationContext context) {
         this.bookService = context.getBean("bookService", BookService.class);
@@ -101,8 +102,7 @@ public class RepertoryPanel extends CommonPanel {
         Box downBox2 = new Box(BoxLayout.X_AXIS);
 
         this.bookInRecords = new Vector<BookInRecordVO>();
-        DefaultTableModel bookModel = new DefaultTableModel(this.bookInRecords,
-                this.bookInColumns);
+        DefaultTableModel bookModel = new DefaultTableModel(this.bookInRecords, this.bookInColumns);
         this.bookInTable = new CommonJTable(bookModel);
         setBookInRecordFace();
 
@@ -255,7 +255,11 @@ public class RepertoryPanel extends CommonPanel {
             return;
         }
         InRecordVO r = new InRecordVO();
-        r.setRecordDate(new Date(this.inDate.getText()));
+        try {
+            r.setRecordDate(timeFormat.parse(this.inDate.getText()));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
         r.setBookInRecordVOs(this.bookInRecords);
         inRecordService.save(r);
         //重新读取数据
@@ -451,31 +455,9 @@ public class RepertoryPanel extends CommonPanel {
     //创建界面中选择书的下拉框
     private void buildBooksComboBox() {
         List<BookVO> books = bookService.getAll();
-        for (BookVO book : books) {
-            this.bookComboBox.addItem(makeBook(book));
+        for (BookVO bookVO : books) {
+            this.bookComboBox.addItem(bookVO);
         }
-    }
-
-    //创建Book对象, 用于添加到下拉框中, 重写了equals和toString方法
-    private BookVO makeBook(final BookVO source) {
-        BookVO book = new BookVO() {
-            public boolean equals(Object obj) {
-                if (obj instanceof BookVO) {
-                    BookVO b = (BookVO) obj;
-                    if (getId().equals(b.getId())) return true;
-                }
-                return false;
-            }
-
-            public String toString() {
-                return getBookName();
-            }
-        };
-        book.setBookName(source.getBookName());
-        book.setBookPrice(source.getBookPrice());
-        book.setRepertorySize(source.getRepertorySize());
-        book.setId(source.getId());
-        return book;
     }
 
     //设置界面显示的交易时间

@@ -79,7 +79,7 @@ public class MainFrame extends JFrame {
         menu.add(type).setAccelerator(KeyStroke.getKeyStroke('T', InputEvent.CTRL_MASK));
         menu.add(concern).setAccelerator(KeyStroke.getKeyStroke('T', InputEvent.CTRL_MASK));
 
-        //让界面作为第一显示界面
+        //让销售界面作为第一显示界面
         this.salePanel = new SalePanel(context);
         this.add(salePanel);
         this.currentPanel = salePanel;

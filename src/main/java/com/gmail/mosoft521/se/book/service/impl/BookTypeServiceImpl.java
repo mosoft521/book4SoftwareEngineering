@@ -31,8 +31,8 @@ public class BookTypeServiceImpl implements BookTypeService {
     }
 
     public BookType add(BookType bookType) {
-        int id = bookTypeMapper.insert(bookType);
-        return get(id);
+        bookTypeMapper.insert(bookType);
+        return get(bookType.getId());
     }
 
     public BookType update(BookType bookType) {

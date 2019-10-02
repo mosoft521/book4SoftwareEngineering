@@ -374,7 +374,7 @@ public class BookPanel extends CommonPanel {
     private boolean validatePrice() {
         String price = this.price.getText();
         try {
-            Integer p = Integer.parseInt(price);
+            Double p = Double.parseDouble(price);
             return true;
         } catch (Exception e) {
             return false;

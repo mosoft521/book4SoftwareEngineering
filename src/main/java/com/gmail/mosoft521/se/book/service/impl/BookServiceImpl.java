@@ -54,7 +54,7 @@ public class BookServiceImpl implements BookService {
 
     //设置关系对象
     private List<BookVO> setAssociate(List<Book> result) {
-        List<BookVO> bookVOs = new ArrayList<>();
+        List<BookVO> bookVOList = new ArrayList<>();
         //遍历结果集合，设置每一个书的对象
         for (Book book : result) {
             BookVO bookVO = new BookVO();
@@ -63,15 +63,15 @@ public class BookServiceImpl implements BookService {
             bookVO.setBookType(bookTypeMapper.selectByPrimaryKey(book.getTypeId()));
             //查找出对应的出版社，再为书设置出版社对象
             bookVO.setPublisher(publisherMapper.selectByPrimaryKey(book.getPubId()));
-            bookVOs.add(bookVO);
+            bookVOList.add(bookVO);
         }
-        return bookVOs;
+        return bookVOList;
     }
 
     @Override
     public BookVO add(BookVO bookVO) {
-        int id = bookMapper.insert(bookVO);
-        return get(id);
+        bookMapper.insert(bookVO);
+        return get(bookVO.getId());
     }
 
     @Override

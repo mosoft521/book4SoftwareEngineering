@@ -132,9 +132,10 @@ public class InRecordServiceImpl implements InRecordService {
 
     @Override
     public void save(InRecordVO inRecordVO) {
-        int id = inRecordMapper.insert(inRecordVO);
+        inRecordMapper.insert(inRecordVO);
         for (BookInRecordVO bookInRecordVO : inRecordVO.getBookInRecordVOs()) {
-            bookInRecordVO.setInRecordId(id);
+            bookInRecordVO.setInRecordId(inRecordVO.getId());
+            bookInRecordVO.setBookId(bookInRecordVO.getBookVO().getId());
             bookInRecordMapper.insert(bookInRecordVO);
             //修改书的库存
             int bookId = bookInRecordVO.getBookVO().getId();

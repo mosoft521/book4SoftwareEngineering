@@ -72,7 +72,7 @@ public class SalePanel extends CommonPanel {
     //日期格式
     private SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
     //时间格式
-    private SimpleDateFormat timeFormat = new SimpleDateFormat("yyyy-MM-dd HH-mm-ss");
+    private SimpleDateFormat timeFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
     public SalePanel(ApplicationContext context) {
         this.bookService = context.getBean("bookService", BookService.class);
@@ -442,32 +442,10 @@ public class SalePanel extends CommonPanel {
 
     //创建界面中选择书的下拉框
     private void buildBooksComboBox() {
-        java.util.List<BookVO> books = bookService.getAll();
-        for (Book book : books) {
-            this.bookComboBox.addItem(makeBook(book));
+        java.util.List<BookVO> bookVOList = bookService.getAll();
+        for (Book bookVO : bookVOList) {
+            this.bookComboBox.addItem(bookVO);
         }
-    }
-
-    //创建Book对象, 用于添加到下拉框中, 重写了equals和toString方法
-    private Book makeBook(final Book source) {
-        Book book = new Book() {
-            public boolean equals(Object obj) {
-                if (obj instanceof Book) {
-                    Book b = (Book) obj;
-                    if (getId().equals(b.getId())) return true;
-                }
-                return false;
-            }
-
-            public String toString() {
-                return getBookName();
-            }
-        };
-        book.setBookName(source.getBookName());
-        book.setBookPrice(source.getBookPrice());
-        book.setRepertorySize(source.getRepertorySize());
-        book.setId(source.getId());
-        return book;
     }
 
     //查看一条销售记录
