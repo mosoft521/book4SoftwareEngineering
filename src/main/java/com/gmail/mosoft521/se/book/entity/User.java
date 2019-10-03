@@ -1,11 +1,17 @@
 package com.gmail.mosoft521.se.book.entity;
 
+import java.util.Date;
+
 public class User {
     private Integer id;
 
     private String userName;
 
     private String userPassword;
+
+    private Date createTime;
+
+    private Integer createBy;
 
     public Integer getId() {
         return id;
@@ -29,5 +35,21 @@ public class User {
 
     public void setUserPassword(String userPassword) {
         this.userPassword = userPassword == null ? null : userPassword.trim();
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
+    public Integer getCreateBy() {
+        return createBy;
+    }
+
+    public void setCreateBy(Integer createBy) {
+        this.createBy = createBy;
     }
 }

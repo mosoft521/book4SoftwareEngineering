@@ -1,5 +1,7 @@
 package com.gmail.mosoft521.se.book.entity;
 
+import java.util.Date;
+
 public class Publisher {
     private Integer id;
 
@@ -10,6 +12,10 @@ public class Publisher {
     private String pubLinkMan;
 
     private String pubIntro;
+
+    private Date createTime;
+
+    private Integer createBy;
 
     public Integer getId() {
         return id;
@@ -49,5 +55,21 @@ public class Publisher {
 
     public void setPubIntro(String pubIntro) {
         this.pubIntro = pubIntro == null ? null : pubIntro.trim();
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
+    public Integer getCreateBy() {
+        return createBy;
+    }
+
+    public void setCreateBy(Integer createBy) {
+        this.createBy = createBy;
     }
 }

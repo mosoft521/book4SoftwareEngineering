@@ -7,6 +7,8 @@
     <result column="PUB_TEL" jdbcType="VARCHAR" property="pubTel" />
     <result column="PUB_LINK_MAN" jdbcType="VARCHAR" property="pubLinkMan" />
     <result column="PUB_INTRO" jdbcType="VARCHAR" property="pubIntro" />
+    <result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="CREATE_BY" jdbcType="INTEGER" property="createBy" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -67,7 +69,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    ID, PUB_NAME, PUB_TEL, PUB_LINK_MAN, PUB_INTRO
+    ID, PUB_NAME, PUB_TEL, PUB_LINK_MAN, PUB_INTRO, CREATE_TIME, CREATE_BY
   </sql>
   <select id="selectByExample" parameterType="com.gmail.mosoft521.se.book.entity.PublisherExample" resultMap="BaseResultMap">
     select
@@ -104,9 +106,11 @@
       SELECT LAST_INSERT_ID()
     </selectKey>
     insert into t_publisher (PUB_NAME, PUB_TEL, PUB_LINK_MAN, 
-      PUB_INTRO)
+      PUB_INTRO, CREATE_TIME, CREATE_BY
+      )
     values (#{pubName,jdbcType=VARCHAR}, #{pubTel,jdbcType=VARCHAR}, #{pubLinkMan,jdbcType=VARCHAR}, 
-      #{pubIntro,jdbcType=VARCHAR})
+      #{pubIntro,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{createBy,jdbcType=INTEGER}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.gmail.mosoft521.se.book.entity.Publisher">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
@@ -126,6 +130,12 @@
       <if test="pubIntro != null">
         PUB_INTRO,
       </if>
+      <if test="createTime != null">
+        CREATE_TIME,
+      </if>
+      <if test="createBy != null">
+        CREATE_BY,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="pubName != null">
@@ -139,6 +149,12 @@
       </if>
       <if test="pubIntro != null">
         #{pubIntro,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null">
+        #{createBy,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -166,6 +182,12 @@
       <if test="record.pubIntro != null">
         PUB_INTRO = #{record.pubIntro,jdbcType=VARCHAR},
       </if>
+      <if test="record.createTime != null">
+        CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.createBy != null">
+        CREATE_BY = #{record.createBy,jdbcType=INTEGER},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -177,7 +199,9 @@
       PUB_NAME = #{record.pubName,jdbcType=VARCHAR},
       PUB_TEL = #{record.pubTel,jdbcType=VARCHAR},
       PUB_LINK_MAN = #{record.pubLinkMan,jdbcType=VARCHAR},
-      PUB_INTRO = #{record.pubIntro,jdbcType=VARCHAR}
+      PUB_INTRO = #{record.pubIntro,jdbcType=VARCHAR},
+      CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      CREATE_BY = #{record.createBy,jdbcType=INTEGER}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -197,6 +221,12 @@
       <if test="pubIntro != null">
         PUB_INTRO = #{pubIntro,jdbcType=VARCHAR},
       </if>
+      <if test="createTime != null">
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null">
+        CREATE_BY = #{createBy,jdbcType=INTEGER},
+      </if>
     </set>
     where ID = #{id,jdbcType=INTEGER}
   </update>
@@ -205,7 +235,9 @@
     set PUB_NAME = #{pubName,jdbcType=VARCHAR},
       PUB_TEL = #{pubTel,jdbcType=VARCHAR},
       PUB_LINK_MAN = #{pubLinkMan,jdbcType=VARCHAR},
-      PUB_INTRO = #{pubIntro,jdbcType=VARCHAR}
+      PUB_INTRO = #{pubIntro,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      CREATE_BY = #{createBy,jdbcType=INTEGER}
     where ID = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

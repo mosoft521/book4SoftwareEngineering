@@ -1,5 +1,7 @@
 package com.gmail.mosoft521.se.book.entity;
 
+import java.util.Date;
+
 public class Book {
     private Integer id;
 
@@ -18,6 +20,10 @@ public class Book {
     private String author;
 
     private Long repertorySize;
+
+    private Date createTime;
+
+    private Integer createBy;
 
     public Integer getId() {
         return id;
@@ -89,5 +95,21 @@ public class Book {
 
     public void setRepertorySize(Long repertorySize) {
         this.repertorySize = repertorySize;
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
+    public Integer getCreateBy() {
+        return createBy;
+    }
+
+    public void setCreateBy(Integer createBy) {
+        this.createBy = createBy;
     }
 }
