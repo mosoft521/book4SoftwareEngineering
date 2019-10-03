@@ -4,7 +4,7 @@
 /*==============================================================*/
 create table t_book
 (
-   ID                   int(11) not null comment '主键',
+   ID                   int(11) not null auto_increment comment '主键',
    BOOK_NAME            varchar(50) comment '图书名称',
    BOOK_INTRO           varchar(200) comment '简介',
    BOOK_PRICE           double comment '图书单价',
@@ -13,7 +13,7 @@ create table t_book
    IMAGE_URL            varchar(200) comment '缩略图url',
    AUTHOR               varchar(200) comment '作者',
    REPERTORY_SIZE       bigint(10) comment '库存量',
-   CREATE_TIME          datetime not null comment '创建时间',
+   CREATE_TIME          datetime not null default CURRENT_TIMESTAMP comment '创建时间',
    CREATE_BY            int(11) not null comment '创建人',
    primary key (ID)
 );
@@ -41,11 +41,11 @@ create index TYPE_ID_FK on t_book
 /*==============================================================*/
 create table t_book_in_record
 (
-   ID                   int(11) not null comment '主键',
+   ID                   int(11) not null auto_increment comment '主键',
    BOOK_ID              int(11) comment '图书',
    IN_RECORD_ID         int(11) comment '销售记录',
    IN_SUM               int(10) comment '入库数量',
-   CREATE_TIME          datetime not null comment '创建时间',
+   CREATE_TIME          datetime not null default CURRENT_TIMESTAMP comment '创建时间',
    CREATE_BY            int(11) not null comment '创建人',
    primary key (ID)
 );
@@ -73,11 +73,11 @@ create index T_IN_RECORD_ID_FK on t_book_in_record
 /*==============================================================*/
 create table t_book_sale_record
 (
-   ID                   int(11) not null comment '主键',
+   ID                   int(11) not null auto_increment comment '主键',
    BOOK_ID              int(11) comment '图书',
    SALE_RECORD_ID       int(11) comment '图书销售记录',
    TRADE_SUM            int(10) comment '销售数量',
-   CREATE_TIME          datetime not null comment '创建时间',
+   CREATE_TIME          datetime not null default CURRENT_TIMESTAMP comment '创建时间',
    CREATE_BY            int(11) not null comment '创建人',
    primary key (ID)
 );
@@ -105,10 +105,10 @@ create index T_SALE_RECORD_ID_FK on t_book_sale_record
 /*==============================================================*/
 create table t_book_type
 (
-   ID                   int(11) not null comment '主键',
+   ID                   int(11) not null auto_increment comment '主键',
    TYPE_NAME            varchar(50) comment '名称',
    TYPE_INTRO           varchar(200) comment '简介',
-   CREATE_TIME          datetime not null comment '创建时间',
+   CREATE_TIME          datetime not null default CURRENT_TIMESTAMP comment '创建时间',
    CREATE_BY            int(11) not null comment '创建人',
    primary key (ID)
 );
@@ -120,9 +120,9 @@ alter table t_book_type comment '图书种类';
 /*==============================================================*/
 create table t_in_record
 (
-   ID                   int(11) not null comment '主键',
+   ID                   int(11) not null auto_increment comment '主键',
    RECORD_DATE          datetime comment '入库日期',
-   CREATE_TIME          datetime not null comment '创建时间',
+   CREATE_TIME          datetime not null default CURRENT_TIMESTAMP comment '创建时间',
    CREATE_BY            int(11) not null comment '创建人',
    primary key (ID)
 );
@@ -134,12 +134,12 @@ alter table t_in_record comment '入库记录';
 /*==============================================================*/
 create table t_publisher
 (
-   ID                   int(11) not null comment '主键',
+   ID                   int(11) not null auto_increment comment '主键',
    PUB_NAME             varchar(50) comment '出版社名称',
    PUB_TEL              varchar(50) comment '出版社电话',
    PUB_LINK_MAN         varchar(50) comment '联系人',
    PUB_INTRO            varchar(200) comment '简介',
-   CREATE_TIME          datetime not null comment '创建时间',
+   CREATE_TIME          datetime not null default CURRENT_TIMESTAMP comment '创建时间',
    CREATE_BY            int(11) not null comment '创建人',
    primary key (ID)
 );
@@ -151,9 +151,9 @@ alter table t_publisher comment '出版社';
 /*==============================================================*/
 create table t_sale_record
 (
-   ID                   int(11) not null comment '主键',
+   ID                   int(11) not null auto_increment comment '主键',
    RECORD_DATE          datetime comment '销售日期',
-   CREATE_TIME          datetime not null comment '创建时间',
+   CREATE_TIME          datetime not null default CURRENT_TIMESTAMP comment '创建时间',
    CREATE_BY            int(11) not null comment '创建人',
    primary key (ID)
 );
@@ -168,7 +168,8 @@ create table t_user
    ID                   int(11) not null auto_increment comment '主键',
    USER_NAME            varchar(20) comment '用户名',
    USER_PASSWORD        varchar(20) comment '密码',
-   CREATE_TIME          datetime not null comment '创建时间',
+   CREATE_TIME          datetime not null default CURRENT_TIMESTAMP comment '创建时间',
+   CREATE_BY            int(11) not null comment '创建人',
    primary key (ID)
 );
 
