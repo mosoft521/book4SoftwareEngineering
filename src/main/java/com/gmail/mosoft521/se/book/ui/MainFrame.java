@@ -27,7 +27,7 @@ public class MainFrame extends JFrame {
     private SalePanel salePanel;
     private RepertoryPanel repertoryPanel;
     private BookPanel bookPanel;
-    private ConcernPanel concernPanel;
+    private PublisherPanel publisherPanel;
 
 
     private Action sale = new AbstractAction("销售管理", new ImageIcon("images/sale.gif")) {
@@ -58,7 +58,7 @@ public class MainFrame extends JFrame {
 
     private Action concern = new AbstractAction("出版社管理", new ImageIcon("images/concern.gif")) {
         public void actionPerformed(ActionEvent e) {
-            changePanel(concernPanel);
+            changePanel(publisherPanel);
         }
     };
 
@@ -91,7 +91,7 @@ public class MainFrame extends JFrame {
         //初始化书本管理界面
         bookPanel = new BookPanel(context);
         //初始化出版社管理界面
-        concernPanel = new ConcernPanel(context);
+        publisherPanel = new PublisherPanel(context);
         //初始化种类管理界面
         typePanel = new TypePanel(context);
 

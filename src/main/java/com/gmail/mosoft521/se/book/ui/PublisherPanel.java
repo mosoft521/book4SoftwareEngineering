@@ -17,7 +17,7 @@ import java.util.Vector;
 /**
  * 出版社的JPanel对象
  */
-public class ConcernPanel extends CommonPanel {
+public class PublisherPanel extends CommonPanel {
     private PublisherService publisherService;
 
     //清空按钮
@@ -40,7 +40,7 @@ public class ConcernPanel extends CommonPanel {
     JTextField queryName;
     private Vector columns;
 
-    public ConcernPanel(ApplicationContext context) {
+    public PublisherPanel(ApplicationContext context) {
         this.publisherService = context.getBean("publisherService", PublisherService.class);
         //初始化列集合
         initColumns();
