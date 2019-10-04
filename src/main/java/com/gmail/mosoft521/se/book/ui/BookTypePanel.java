@@ -16,9 +16,9 @@ import java.util.List;
 import java.util.Vector;
 
 /**
- * 种类管理界面
+ * 图书种类管理界面
  */
-public class TypePanel extends CommonPanel {
+public class BookTypePanel extends CommonPanel {
     //业务对象
     @Autowired
     private BookTypeService bookTypeService;
@@ -47,7 +47,7 @@ public class TypePanel extends CommonPanel {
     //查询按钮
     private JButton queryButton;
 
-    public TypePanel(ApplicationContext context) {
+    public BookTypePanel(ApplicationContext context) {
         this.bookTypeService = context.getBean("bookTypeService", BookTypeService.class);
         //设置数据
         setViewDatas();

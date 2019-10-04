@@ -22,7 +22,7 @@ public class MainFrame extends JFrame {
     private SaleRecordService saleRecordService;
     private InRecordService inRecordService;
 
-    TypePanel typePanel;
+    BookTypePanel bookTypePanel;
     CommonPanel currentPanel;
     private SalePanel salePanel;
     private RepertoryPanel repertoryPanel;
@@ -52,7 +52,7 @@ public class MainFrame extends JFrame {
 
     private Action type = new AbstractAction("种类管理", new ImageIcon("images/type.gif")) {
         public void actionPerformed(ActionEvent e) {
-            changePanel(typePanel);
+            changePanel(bookTypePanel);
         }
     };
 
@@ -93,7 +93,7 @@ public class MainFrame extends JFrame {
         //初始化出版社管理界面
         publisherPanel = new PublisherPanel(context);
         //初始化种类管理界面
-        typePanel = new TypePanel(context);
+        bookTypePanel = new BookTypePanel(context);
 
         this.setJMenuBar(menuBar);
         this.setTitle("图书进存销管理系统");
