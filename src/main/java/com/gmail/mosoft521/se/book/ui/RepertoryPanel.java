@@ -53,7 +53,13 @@ public class RepertoryPanel extends CommonPanel {
     //图书原有的数量
     JLabel repertorySize;
     JButton inButton;
+    //查询按钮
+    JButton queyrButton;
+    //查询输入的日期
+    JTextField queryDate;
 
+    //日期格式
+    private SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
     //时间格式
     private SimpleDateFormat timeFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
@@ -168,9 +174,11 @@ public class RepertoryPanel extends CommonPanel {
         Box queryBox = new Box(BoxLayout.X_AXIS);
         queryBox.add(new JLabel("日期："));
         queryBox.add(Box.createHorizontalStrut(30));
-        queryBox.add(new JTextField(20));
+        this.queryDate = new JTextField(20);
+        queryBox.add(this.queryDate);
         queryBox.add(Box.createHorizontalStrut(30));
-        queryBox.add(new JButton("查询"));
+        this.queyrButton = new JButton("查询");
+        queryBox.add(this.queyrButton);
         queryPanel.add(queryBox);
         this.add(queryPanel);
 
@@ -241,6 +249,29 @@ public class RepertoryPanel extends CommonPanel {
                 in();
             }
         });
+        //查询
+        this.queyrButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                query();
+            }
+        });
+    }
+
+    private void query() {
+        String date = this.queryDate.getText();
+        Date d = null;
+        try {
+            d = dateFormat.parse(date);
+        } catch (ParseException e) {
+            showWarn("请输入yyyy-MM-dd的格式日期");
+            return;
+        }
+        //重新执行查询
+        List<InRecordVO> records = inRecordService.getAll(d);
+        Vector<Vector> datas = changeDatas(records);
+        setDatas(datas);
+        //刷新列表
+        refreshTable();
     }
 
     //入库的方法
