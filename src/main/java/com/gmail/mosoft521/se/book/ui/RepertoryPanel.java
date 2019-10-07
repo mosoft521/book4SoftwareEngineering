@@ -36,7 +36,7 @@ public class RepertoryPanel extends CommonPanel {
     JTable bookInTable;
     //书的入库记录列表数据
     Vector<BookInRecordVO> bookInRecords;
-    //选择书本的下拉框
+    //选择图书的下拉框
     JComboBox bookComboBox;
     JTextField amount;
     JTextField inDate;
@@ -50,7 +50,7 @@ public class RepertoryPanel extends CommonPanel {
     JButton deleteBookButton;
     //向书的入库列表添加书时的数量输入框
     JTextField bookAmount;
-    //书本原有的数量
+    //图书原有的数量
     JLabel repertorySize;
     JButton inButton;
 
@@ -114,7 +114,7 @@ public class RepertoryPanel extends CommonPanel {
         Box downBox3 = new Box(BoxLayout.X_AXIS);
         downBox3.add(Box.createHorizontalStrut(300));
 
-        downBox3.add(new JLabel("书本："));
+        downBox3.add(new JLabel("图书："));
         downBox3.add(Box.createHorizontalStrut(20));
         this.bookComboBox = new JComboBox();
         buildBooksComboBox();
@@ -185,7 +185,7 @@ public class RepertoryPanel extends CommonPanel {
     private void initColumns() {
         this.columns = new Vector();
         this.columns.add("id");
-        this.columns.add("入库书本");
+        this.columns.add("入库图书");
         this.columns.add("入库日期");
         this.columns.add("入库数量");
         this.bookInColumns = new Vector();
@@ -209,7 +209,7 @@ public class RepertoryPanel extends CommonPanel {
                 }
             }
         });
-        //书本选择下拉监听器
+        //图书选择下拉监听器
         this.bookComboBox.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 changeBook();
@@ -305,7 +305,7 @@ public class RepertoryPanel extends CommonPanel {
         countAmount();
     }
 
-    //当书本选择下拉框发生改变时, 执行该方法
+    //当图书选择下拉框发生改变时, 执行该方法
     private void changeBook() {
         //获得选择的Book对象
         BookVO book = (BookVO) bookComboBox.getSelectedItem();
@@ -322,7 +322,7 @@ public class RepertoryPanel extends CommonPanel {
         this.amount.setText(String.valueOf(amount));
     }
 
-    //添加或者修改书本交易记录中的对象
+    //添加或者修改图书交易记录中的对象
     private void appendOrUpdate(BookVO book, String amount) {
         BookInRecord r = getBookInRecordFromView(book);
         //如果为空, 则为新添加的书, 非空, 则该书已经在列表中
@@ -405,7 +405,7 @@ public class RepertoryPanel extends CommonPanel {
 
     @Override
     public void setTableFace() {
-        getJTable().getColumn("入库书本").setMinWidth(350);
+        getJTable().getColumn("入库图书").setMinWidth(350);
         getJTable().setRowHeight(30);
         getJTable().getColumn("id").setMinWidth(-1);
         getJTable().getColumn("id").setMaxWidth(-1);
@@ -436,7 +436,7 @@ public class RepertoryPanel extends CommonPanel {
         return view;
     }
 
-    //刷新书本入库记录的列表
+    //刷新图书入库记录的列表
     private void refreshBookInRecordTableData() {
         Vector<Vector> view = changeBookInRecordDate(this.bookInRecords);
         DefaultTableModel tableModel = (DefaultTableModel) this.bookInTable.getModel();

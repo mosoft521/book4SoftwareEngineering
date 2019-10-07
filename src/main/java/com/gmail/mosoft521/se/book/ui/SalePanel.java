@@ -38,7 +38,7 @@ public class SalePanel extends CommonPanel {
     Vector bookSaleRecordColumns;
     //书的交易记录列表
     JTable bookSaleRecordTable;
-    //书本选择的下拉框
+    //图书选择的下拉框
     JComboBox bookComboBox;
     //书的销售记录数据
     Vector<BookSaleRecordVO> bookSaleRecordDatas;
@@ -119,7 +119,7 @@ public class SalePanel extends CommonPanel {
         this.bookSaleRecordDatas = new Vector();
         DefaultTableModel bookModel = new DefaultTableModel(this.bookSaleRecordDatas, this.bookSaleRecordColumns);
         this.bookSaleRecordTable = new CommonJTable(bookModel);
-        //设置书本交易记录列表的样式
+        //设置图书交易记录列表的样式
         setBookSaleRecordTableFace();
         JScrollPane bookScrollPane = new JScrollPane(this.bookSaleRecordTable);
         bookScrollPane.setPreferredSize(new Dimension(1000, 120));
@@ -127,7 +127,7 @@ public class SalePanel extends CommonPanel {
         /*******************************************************/
         Box downBox3 = new Box(BoxLayout.X_AXIS);
         downBox3.add(Box.createHorizontalStrut(100));
-        downBox3.add(new JLabel("书本："));
+        downBox3.add(new JLabel("图书："));
         downBox3.add(Box.createHorizontalStrut(20));
         //创建界面中书的下拉框
         this.bookComboBox = new JComboBox();
@@ -195,7 +195,7 @@ public class SalePanel extends CommonPanel {
         //初始化销售记录列表的列
         this.columns = new Vector();
         this.columns.add("id");
-        this.columns.add("购买书本");
+        this.columns.add("购买图书");
         this.columns.add("总价");
         this.columns.add("交易日期");
         this.columns.add("总数量");
@@ -227,7 +227,7 @@ public class SalePanel extends CommonPanel {
                 clear();
             }
         });
-        //书本选择下拉监听器
+        //图书选择下拉监听器
         this.bookComboBox.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 changeBook();
@@ -330,7 +330,7 @@ public class SalePanel extends CommonPanel {
         setTotalAmount();
     }
 
-    //添加或者修改书本交易记录中的对象
+    //添加或者修改图书交易记录中的对象
     private void appendOrUpdate(BookVO book, String amount) {
         BookSaleRecord r = getBookSaleRecordFromView(book);
         //如果为空, 则为新添加的书, 非空, 则该书已经在列表中
@@ -395,7 +395,7 @@ public class SalePanel extends CommonPanel {
     }
 
 
-    //当书本选择下拉框发生改变时, 执行该方法
+    //当图书选择下拉框发生改变时, 执行该方法
     private void changeBook() {
         //获得选择的Book对象
         Book book = (Book) bookComboBox.getSelectedItem();
@@ -460,14 +460,14 @@ public class SalePanel extends CommonPanel {
         Integer saleRecordId = getSelectId(getJTable());
         //得到书的交易记录
         SaleRecordVO record = saleRecordService.get(saleRecordId);
-        //设置当前书本销售数据
+        //设置当前图书销售数据
         List<BookSaleRecordVO> bookSaleRecordVOList = record.getBookSaleRecordVOList();
         Vector<BookSaleRecordVO> bookSaleRecordVOVector = new Vector<>();
         for (BookSaleRecordVO bookSaleRecordVO : bookSaleRecordVOList) {
             bookSaleRecordVOVector.add(bookSaleRecordVO);
         }
         this.bookSaleRecordDatas = bookSaleRecordVOVector;
-        //刷新书本销售列表
+        //刷新图书销售列表
         refreshBookSaleRecordTableData();
         this.saleRecordId.setText(record.getId().toString());
         this.totalPrice.setText(String.valueOf(record.getTotalPrice()));
@@ -490,7 +490,7 @@ public class SalePanel extends CommonPanel {
         return view;
     }
 
-    //刷新书本销售记录的列表
+    //刷新图书销售记录的列表
     private void refreshBookSaleRecordTableData() {
         Vector<Vector> view = changeBookSaleRecordDate(this.bookSaleRecordDatas);
         DefaultTableModel tableModel = (DefaultTableModel) this.bookSaleRecordTable.getModel();
@@ -500,7 +500,7 @@ public class SalePanel extends CommonPanel {
         setBookSaleRecordTableFace();
     }
 
-    //设置书本销售记录的样式
+    //设置图书销售记录的样式
     private void setBookSaleRecordTableFace() {
         this.bookSaleRecordTable.setRowHeight(30);
         //隐藏销售记录id列
@@ -520,7 +520,7 @@ public class SalePanel extends CommonPanel {
     public void setTableFace() {
         getJTable().getColumn("id").setMinWidth(-1);
         getJTable().getColumn("id").setMaxWidth(-1);
-        getJTable().getColumn("购买书本").setMinWidth(350);
+        getJTable().getColumn("购买图书").setMinWidth(350);
         getJTable().setRowHeight(30);
     }
 

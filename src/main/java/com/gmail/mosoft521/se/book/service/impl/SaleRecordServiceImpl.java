@@ -66,7 +66,7 @@ public class SaleRecordServiceImpl implements SaleRecordService {
         return saleRecordVOList;
     }
 
-    //处理一个SaleRecord, 设置它的书本销售记录属性和书本名字属性
+    //处理一个SaleRecord, 设置它的图书销售记录属性和图书名字属性
     private SaleRecordVO processDatas(SaleRecordVO saleRecordVO) {
         //查找该记录所对应的书的销售记录
         BookSaleRecordExample bookSaleRecordExample = new BookSaleRecordExample();
@@ -95,7 +95,7 @@ public class SaleRecordServiceImpl implements SaleRecordService {
     private double getTotalPrice(List<BookSaleRecordVO> bookSaleRecordVOList) {
         double result = 0;
         for (BookSaleRecordVO bookSaleRecordVO : bookSaleRecordVOList) {
-            //书本的交易量
+            //图书的交易量
             int tradeSum = bookSaleRecordVO.getTradeSum();
             //书的单价
             double bookPrice = bookSaleRecordVO.getBookVO().getBookPrice();
@@ -104,7 +104,7 @@ public class SaleRecordServiceImpl implements SaleRecordService {
         return result;
     }
 
-    //获取一次交易中所有书本的交易量
+    //获取一次交易中所有图书的交易量
     private int getAmount(List<BookSaleRecordVO> bookSaleRecordVOList) {
         int result = 0;
         //遍历书的交易记录，计算总价
@@ -117,7 +117,7 @@ public class SaleRecordServiceImpl implements SaleRecordService {
     //设置参数中的每一个BookSaleRecord的book属性
     private void setBook(List<BookSaleRecordVO> bookSaleRecordVOList) {
         for (BookSaleRecordVO bookSaleRecordVO : bookSaleRecordVOList) {
-            //调书本的数据访问层接口
+            //调图书的数据访问层接口
             Book book = bookMapper.selectByPrimaryKey(bookSaleRecordVO.getBookId());
             BookVO bookVO = new BookVO();
             BeanUtils.copyProperties(book, bookVO);
@@ -125,7 +125,7 @@ public class SaleRecordServiceImpl implements SaleRecordService {
         }
     }
 
-    //获取一次交易中所有书本的名字, 以逗号隔开
+    //获取一次交易中所有图书的名字, 以逗号隔开
     private String getBookNames(List<BookSaleRecordVO> bookSaleRecordVOList) {
         if (bookSaleRecordVOList.isEmpty()) return "";
         StringBuilder result = new StringBuilder();

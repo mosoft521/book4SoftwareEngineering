@@ -83,7 +83,7 @@ public class InRecordServiceImpl implements InRecordService {
         return inRecordVO;
     }
 
-    //获取一次入库记录中所有书本的交易量
+    //获取一次入库记录中所有图书的交易量
     private int getAmount(List<BookInRecordVO> bookInRecordVOList) {
         int result = 0;
         for (BookInRecord bookInRecord : bookInRecordVOList) {
@@ -111,7 +111,7 @@ public class InRecordServiceImpl implements InRecordService {
         }
     }
 
-    //获取一次入库记录中所有书本的名字, 以逗号隔开
+    //获取一次入库记录中所有图书的名字, 以逗号隔开
     private String getBookNames(List<BookInRecordVO> bookInRecordVOList) {
         if (bookInRecordVOList.isEmpty()) return "";
         StringBuilder result = new StringBuilder();

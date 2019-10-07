@@ -42,7 +42,7 @@ public class MainFrame extends JFrame {
         }
     };
 
-    private Action book = new AbstractAction("书本管理", new ImageIcon("images/book.gif")) {
+    private Action book = new AbstractAction("图书管理", new ImageIcon("images/book.gif")) {
         public void actionPerformed(ActionEvent e) {
             changePanel(bookPanel);
             bookPanel.initImage();
@@ -88,7 +88,7 @@ public class MainFrame extends JFrame {
 
         //初始化库存管理界面
         repertoryPanel = new RepertoryPanel(context);
-        //初始化书本管理界面
+        //初始化图书管理界面
         bookPanel = new BookPanel(context);
         //初始化出版社管理界面
         publisherPanel = new PublisherPanel(context);

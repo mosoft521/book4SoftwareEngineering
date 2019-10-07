@@ -5,7 +5,7 @@ import com.gmail.mosoft521.se.book.entity.BookType;
 import java.util.List;
 
 /**
- * 书本种类业务接口
+ * 图书种类业务接口
  */
 public interface BookTypeService {
 
@@ -25,7 +25,7 @@ public interface BookTypeService {
     List<BookType> query(String typeName);
 
     /**
-     * 新增一个书本种类
+     * 新增一个图书种类
      *
      * @param bookType 需要新增的对象
      * @return 新增后的种类对象
@@ -33,7 +33,7 @@ public interface BookTypeService {
     BookType add(BookType bookType);
 
     /**
-     * 修改一个书本种类
+     * 修改一个图书种类
      *
      * @param bookType 需要修改的对象
      * @return 修改后的对象

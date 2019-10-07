@@ -5,7 +5,7 @@ import com.gmail.mosoft521.se.book.vo.BookVO;
 import java.util.List;
 
 /**
- * 书本业务接口
+ * 图书业务接口
  */
 public interface BookService {
 

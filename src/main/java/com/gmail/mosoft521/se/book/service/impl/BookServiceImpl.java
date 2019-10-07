@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 书本业务实现类
+ * 图书业务实现类
  */
 @Service("bookService")
 @Transactional

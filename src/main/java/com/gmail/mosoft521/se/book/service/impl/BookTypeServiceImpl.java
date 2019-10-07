@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 /**
- * 书本种类业务实现类
+ * 图书种类业务实现类
  */
 @Service("bookTypeService")
 @Transactional

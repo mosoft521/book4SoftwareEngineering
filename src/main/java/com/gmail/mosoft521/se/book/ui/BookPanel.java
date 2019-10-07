@@ -24,7 +24,7 @@ import java.util.Collection;
 import java.util.Vector;
 
 /**
- * 书本界面
+ * 图书界面
  */
 public class BookPanel extends CommonPanel {
     private BookService bookService;
@@ -36,17 +36,17 @@ public class BookPanel extends CommonPanel {
     JComboBox typeComboBox;
     //出版社下拉框
     JComboBox concernComboBox;
-    //书本id
+    //图书id
     JTextField bookId;
-    //书本名称
+    //图书名称
     JTextField bookName;
-    //书本价格
+    //图书价格
     JTextField price;
-    //书本介绍
+    //图书介绍
     JTextArea intro;
     JButton clearButton;
     JButton saveButton;
-    //查询中的书本名称
+    //查询中的图书名称
     JTextField nameQueryTextField;
     //查询按钮
     JButton queryButton;
@@ -90,7 +90,7 @@ public class BookPanel extends CommonPanel {
         bookId.setVisible(false);
         downBox1.add(bookId);
         //列表下面的box
-        downBox1.add(new JLabel("书本名称："));
+        downBox1.add(new JLabel("图书名称："));
         downBox1.add(Box.createHorizontalStrut(10));
         bookName = new JTextField(10);
         downBox1.add(bookName);
@@ -124,7 +124,7 @@ public class BookPanel extends CommonPanel {
         downBox4.add(concernComboBox);
         downBox4.add(Box.createHorizontalStrut(30));
 
-        downBox4.add(new JLabel("书本图片："));
+        downBox4.add(new JLabel("图书图片："));
         this.chooser = new FileChooser(this);
         this.imageButton = new JButton("请选择文件");
         downBox4.add(this.imageButton);
@@ -132,7 +132,7 @@ public class BookPanel extends CommonPanel {
 
         /*******************************************************/
         Box downBox2 = new Box(BoxLayout.X_AXIS);
-        downBox2.add(new JLabel("书本简介："));
+        downBox2.add(new JLabel("图书简介："));
         downBox2.add(Box.createHorizontalStrut(10));
 
         intro = new JTextArea("", 5, 5);
@@ -199,7 +199,7 @@ public class BookPanel extends CommonPanel {
     private void initColumns() {
         this.columns = new Vector();
         this.columns.add("id");
-        this.columns.add("书本名称");
+        this.columns.add("图书名称");
         this.columns.add("简介");
         this.columns.add("作者");
         this.columns.add("所属种类");
@@ -355,13 +355,13 @@ public class BookPanel extends CommonPanel {
         }
     }
 
-    //新增书本
+    //新增图书
     private void add() {
         if (!validatePrice()) {
             JOptionPane.showMessageDialog(this, "请输入正确的价格");
             return;
         }
-        //新增书本时库存为0
+        //新增图书时库存为0
         BookVO book = getBook();
         bookService.add(book);
         //重新读取数据
@@ -381,7 +381,7 @@ public class BookPanel extends CommonPanel {
         }
     }
 
-    //修改书本, 修改时不需要修改库存, 因为库存取决于销售与入货
+    //修改图书, 修改时不需要修改库存, 因为库存取决于销售与入货
     private void update() {
         BookVO book = getBook();
         //由于是修改, 因此需要设置id
@@ -414,7 +414,7 @@ public class BookPanel extends CommonPanel {
         return bookVO;
     }
 
-    //查看书本
+    //查看图书
     private void view() {
         Integer id = getSelectId(getJTable());
         BookVO book = bookService.get(id);
@@ -534,7 +534,7 @@ public class BookPanel extends CommonPanel {
 }
 
 class FileChooser extends JFileChooser {
-    //书本管理界面对象
+    //图书管理界面对象
     BookPanel bookPanel;
 
     public FileChooser(BookPanel bookPanel) {
@@ -545,7 +545,7 @@ class FileChooser extends JFileChooser {
     public void approveSelection() {
         //获得选择的文件
         File file = getSelectedFile();
-        //调用书本管理界面对象的upload方法
+        //调用图书管理界面对象的upload方法
         this.bookPanel.upload(file);
         super.approveSelection();
     }

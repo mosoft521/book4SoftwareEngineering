@@ -5,7 +5,7 @@ import com.gmail.mosoft521.se.book.entity.BookType;
 import com.gmail.mosoft521.se.book.entity.Publisher;
 
 public class BookVO extends Book {
-    //书本种类，从数据库查询出来的时候，这个属性为null，再通过本类的TYPE_ID_FK去设置这个属性
+    //图书种类，从数据库查询出来的时候，这个属性为null，再通过本类的TYPE_ID_FK去设置这个属性
     private BookType bookType;
 
     //书对应的出版社，与type相同
