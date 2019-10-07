@@ -30,13 +30,13 @@ public class MainFrame extends JFrame {
     private PublisherPanel publisherPanel;
 
 
-    private Action sale = new AbstractAction("销售管理", new ImageIcon("images/sale.gif")) {
+    private Action sale = new AbstractAction("销售记账", new ImageIcon("images/sale.gif")) {
         public void actionPerformed(ActionEvent e) {
             changePanel(salePanel);
         }
     };
 
-    private Action repertory = new AbstractAction("库存管理", new ImageIcon("images/repertory.gif")) {
+    private Action repertory = new AbstractAction("进货记账", new ImageIcon("images/repertory.gif")) {
         public void actionPerformed(ActionEvent e) {
             changePanel(repertoryPanel);
         }
@@ -96,15 +96,11 @@ public class MainFrame extends JFrame {
         bookTypePanel = new BookTypePanel(context);
 
         this.setJMenuBar(menuBar);
-        this.setTitle("图书进存销管理系统");
+        this.setTitle("长江图书公司记账信息管理系统");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         this.setVisible(true);
     }
-
-//    public static void main(String[] args) {
-//        new MainFrame();
-//    }
 
     //切换各个界面
     private void changePanel(CommonPanel commonPanel) {
