@@ -24,7 +24,7 @@ import java.util.Collection;
 import java.util.Vector;
 
 /**
- * 图书界面
+ * 图书管理界面
  */
 public class BookPanel extends CommonPanel {
     private BookService bookService;
