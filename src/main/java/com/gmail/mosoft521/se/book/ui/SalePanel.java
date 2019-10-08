@@ -24,7 +24,7 @@ import java.util.List;
 import java.util.Vector;
 
 /**
- * 销售记账界面
+ * 销售界面面板
  */
 public class SalePanel extends CommonPanel {
 

@@ -22,7 +22,7 @@ import java.util.List;
 import java.util.Vector;
 
 /**
- * 入库记账界面
+ * 入库界面面板
  */
 public class RepertoryPanel extends CommonPanel {
     private BookService bookService;
