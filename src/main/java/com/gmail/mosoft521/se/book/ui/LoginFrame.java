@@ -1,17 +1,22 @@
 package com.gmail.mosoft521.se.book.ui;
 
 import com.gmail.mosoft521.se.book.service.UserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 
 /**
  * 登录的JFrame
  */
 public class LoginFrame extends JFrame {
+
+    private static Logger LOGGER = LoggerFactory.getLogger(LoginFrame.class);
 
     private ApplicationContext context;
     private UserService userService;
@@ -69,11 +74,18 @@ public class LoginFrame extends JFrame {
 
     public void initListeners() {
         this.login.addActionListener(new ActionListener() {
-
             public void actionPerformed(ActionEvent e) {
+                LOGGER.info("login");
                 login();
             }
         });
+        this.login.registerKeyboardAction(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                LOGGER.info("login");
+                login();
+            }
+        }, KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), JComponent.WHEN_IN_FOCUSED_WINDOW);
     }
 
     public void login() {
