@@ -15,10 +15,13 @@ import java.util.List;
 import java.util.Vector;
 
 /**
- * 出版社的JPanel对象
+ * 出版社录入的JPanel对象
  */
 public class PublisherPanel extends CommonPanel {
     private PublisherService publisherService;
+
+    //title
+    private String title = "长江图书公司记账信息管理系统-出版社录入";
 
     //清空按钮
     JButton clearButton;
@@ -309,5 +312,13 @@ public class PublisherPanel extends CommonPanel {
         setDatas(datas);
     }
 
+    @Override
+    public String getTitle() {
+        return title;
+    }
 
+    @Override
+    public void setTitle(String title) {
+        this.title = title;
+    }
 }

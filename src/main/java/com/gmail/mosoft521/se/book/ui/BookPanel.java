@@ -24,12 +24,15 @@ import java.util.Collection;
 import java.util.Vector;
 
 /**
- * 图书管理界面
+ * 图书录入界面
  */
 public class BookPanel extends CommonPanel {
     private BookService bookService;
     private BookTypeService bookTypeService;
     private PublisherService publisherService;
+
+    //title
+    private String title = "长江图书公司记账信息管理系统-图书录入";
 
     private final static String DEFAULT_File_Path = "upload/no_pic.gif";
     //种类下拉框
@@ -530,7 +533,15 @@ public class BookPanel extends CommonPanel {
         return concern;
     }
 
+    @Override
+    public String getTitle() {
+        return title;
+    }
 
+    @Override
+    public void setTitle(String title) {
+        this.title = title;
+    }
 }
 
 class FileChooser extends JFileChooser {

@@ -18,6 +18,7 @@ public class ImageFrame extends JFrame {
         this.add(mainPanel);
         this.pack();
         this.setVisible(true);
+        this.setTitle("长江图书公司记账信息管理系统-查看大图片");
     }
 
     public void refresh(ImageIcon image) {

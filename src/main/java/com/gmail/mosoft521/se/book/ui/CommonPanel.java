@@ -9,6 +9,9 @@ import java.util.Vector;
  */
 public abstract class CommonPanel extends JPanel {
 
+    //title
+    private String title;
+
     //列表数据
     protected Vector<Vector> datas;
     //存放数据的table
@@ -92,5 +95,13 @@ public abstract class CommonPanel extends JPanel {
     protected int showWarn(String message) {
         return JOptionPane.showConfirmDialog(this, message, "警告",
                 JOptionPane.OK_CANCEL_OPTION);
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 }

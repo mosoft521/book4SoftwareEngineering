@@ -24,13 +24,16 @@ import java.util.List;
 import java.util.Vector;
 
 /**
- * 销售界面面板
+ * 销售记账界面面板
  */
 public class SalePanel extends CommonPanel {
 
     private BookService bookService;
     //销售记录的业务接口
     private SaleRecordService saleRecordService;
+
+    //title
+    private String title = "长江图书公司记账信息管理系统-销售记账";
 
     //销售记录列
     Vector columns;
@@ -530,5 +533,15 @@ public class SalePanel extends CommonPanel {
         Date now = new Date();
         timeFormat.format(now);
         this.recordDate.setText(timeFormat.format(now));
+    }
+
+    @Override
+    public String getTitle() {
+        return title;
+    }
+
+    @Override
+    public void setTitle(String title) {
+        this.title = title;
     }
 }

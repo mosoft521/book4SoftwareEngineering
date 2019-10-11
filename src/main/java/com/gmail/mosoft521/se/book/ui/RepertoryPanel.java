@@ -22,11 +22,14 @@ import java.util.List;
 import java.util.Vector;
 
 /**
- * 入库界面面板
+ * 进货记账面板
  */
 public class RepertoryPanel extends CommonPanel {
     private BookService bookService;
     private InRecordService inRecordService;
+
+    //title
+    private String title = "长江图书公司记账信息管理系统-进货记账";
 
     //入库记录列表的列集合
     Vector columns;
@@ -508,4 +511,13 @@ public class RepertoryPanel extends CommonPanel {
         this.inDate.setText(timeFormat.format(now));
     }
 
+    @Override
+    public String getTitle() {
+        return title;
+    }
+
+    @Override
+    public void setTitle(String title) {
+        this.title = title;
+    }
 }

@@ -16,12 +16,15 @@ import java.util.List;
 import java.util.Vector;
 
 /**
- * 图书种类管理界面
+ * 图书种类录入界面
  */
 public class BookTypePanel extends CommonPanel {
     //业务对象
     @Autowired
     private BookTypeService bookTypeService;
+
+    //title
+    private String title = "长江图书公司记账信息管理系统-图书种类录入";
 
     //列的集合
     private Vector columns;
@@ -278,4 +281,13 @@ public class BookTypePanel extends CommonPanel {
         return view;
     }
 
+    @Override
+    public String getTitle() {
+        return title;
+    }
+
+    @Override
+    public void setTitle(String title) {
+        this.title = title;
+    }
 }

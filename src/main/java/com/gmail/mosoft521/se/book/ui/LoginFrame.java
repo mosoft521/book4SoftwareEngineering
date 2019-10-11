@@ -63,6 +63,7 @@ public class LoginFrame extends JFrame {
         this.setBounds(300, 250, 350, 200);
         this.pack();
         this.setVisible(true);
+        this.setTitle("长江图书公司记账系统-登录");
         initListeners();
     }
 

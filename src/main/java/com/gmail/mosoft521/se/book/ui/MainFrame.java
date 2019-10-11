@@ -29,6 +29,7 @@ public class MainFrame extends JFrame {
     private BookPanel bookPanel;
     private PublisherPanel publisherPanel;
 
+    private String title = "长江图书公司记账信息管理系统-";
 
     private Action sale = new AbstractAction("销售记账", new ImageIcon("images/sale.gif")) {
         public void actionPerformed(ActionEvent e) {
@@ -42,7 +43,7 @@ public class MainFrame extends JFrame {
         }
     };
 
-    private Action book = new AbstractAction("图书管理", new ImageIcon("images/book.gif")) {
+    private Action book = new AbstractAction("图书录入", new ImageIcon("images/book.gif")) {
         public void actionPerformed(ActionEvent e) {
             changePanel(bookPanel);
             bookPanel.initImage();
@@ -50,13 +51,13 @@ public class MainFrame extends JFrame {
         }
     };
 
-    private Action type = new AbstractAction("种类管理", new ImageIcon("images/type.gif")) {
+    private Action type = new AbstractAction("图书种类录入", new ImageIcon("images/type.gif")) {
         public void actionPerformed(ActionEvent e) {
             changePanel(bookTypePanel);
         }
     };
 
-    private Action concern = new AbstractAction("出版社管理", new ImageIcon("images/concern.gif")) {
+    private Action concern = new AbstractAction("出版社录入", new ImageIcon("images/concern.gif")) {
         public void actionPerformed(ActionEvent e) {
             changePanel(publisherPanel);
         }
@@ -96,7 +97,7 @@ public class MainFrame extends JFrame {
         bookTypePanel = new BookTypePanel(context);
 
         this.setJMenuBar(menuBar);
-        this.setTitle("长江图书公司记账信息管理系统");
+        this.setTitle("长江图书公司记账信息管理系统-销售记账");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         this.setVisible(true);
@@ -112,6 +113,8 @@ public class MainFrame extends JFrame {
         this.currentPanel = commonPanel;
         this.repaint();
         this.setVisible(true);
+        //设置标题
+        this.setTitle(commonPanel.getTitle());
         //重新读取数据
         commonPanel.setViewDatas();
         //刷新列表
