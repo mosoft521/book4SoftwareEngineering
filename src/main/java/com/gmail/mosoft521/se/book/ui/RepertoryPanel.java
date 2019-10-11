@@ -6,6 +6,8 @@ import com.gmail.mosoft521.se.book.service.InRecordService;
 import com.gmail.mosoft521.se.book.vo.BookInRecordVO;
 import com.gmail.mosoft521.se.book.vo.BookVO;
 import com.gmail.mosoft521.se.book.vo.InRecordVO;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
 
 import javax.swing.*;
@@ -15,6 +17,7 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -25,6 +28,8 @@ import java.util.Vector;
  * 进货记账面板
  */
 public class RepertoryPanel extends CommonPanel {
+    private static Logger LOGGER = LoggerFactory.getLogger(RepertoryPanel.class);
+
     private BookService bookService;
     private InRecordService inRecordService;
 
@@ -57,7 +62,7 @@ public class RepertoryPanel extends CommonPanel {
     JLabel repertorySize;
     JButton inButton;
     //查询按钮
-    JButton queyrButton;
+    JButton queryButton;
     //查询输入的日期
     JTextField queryDate;
 
@@ -180,8 +185,8 @@ public class RepertoryPanel extends CommonPanel {
         this.queryDate = new JTextField(20);
         queryBox.add(this.queryDate);
         queryBox.add(Box.createHorizontalStrut(30));
-        this.queyrButton = new JButton("查询");
-        queryBox.add(this.queyrButton);
+        this.queryButton = new JButton("查询");
+        queryBox.add(this.queryButton);
         queryPanel.add(queryBox);
         this.add(queryPanel);
 
@@ -253,11 +258,18 @@ public class RepertoryPanel extends CommonPanel {
             }
         });
         //查询
-        this.queyrButton.addActionListener(new ActionListener() {
+        this.queryButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 query();
             }
         });
+        this.queryButton.registerKeyboardAction(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                LOGGER.info("query");
+                query();
+            }
+        }, KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), JComponent.WHEN_IN_FOCUSED_WINDOW);
     }
 
     private void query() {

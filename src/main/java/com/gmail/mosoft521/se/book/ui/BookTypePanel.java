@@ -2,6 +2,8 @@ package com.gmail.mosoft521.se.book.ui;
 
 import com.gmail.mosoft521.se.book.entity.BookType;
 import com.gmail.mosoft521.se.book.service.BookTypeService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 
@@ -12,6 +14,7 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.util.List;
 import java.util.Vector;
 
@@ -19,6 +22,7 @@ import java.util.Vector;
  * 图书种类录入界面
  */
 public class BookTypePanel extends CommonPanel {
+    private static Logger LOGGER = LoggerFactory.getLogger(BookTypePanel.class);
     //业务对象
     @Autowired
     private BookTypeService bookTypeService;
@@ -184,6 +188,14 @@ public class BookTypePanel extends CommonPanel {
                 query(name);
             }
         });
+        queryButton.registerKeyboardAction(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                LOGGER.info("query");
+                String name = queryByNameTextField.getText();
+                query(name);
+            }
+        }, KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), JComponent.WHEN_IN_FOCUSED_WINDOW);
     }
 
     //查询方法
