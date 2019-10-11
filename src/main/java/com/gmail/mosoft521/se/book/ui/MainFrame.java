@@ -100,6 +100,9 @@ public class MainFrame extends JFrame {
         this.setTitle("长江图书公司记账信息管理系统-销售记账");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+
+        this.setResizable(false);
+        this.setSize(1120,740);
         this.setVisible(true);
     }
 
