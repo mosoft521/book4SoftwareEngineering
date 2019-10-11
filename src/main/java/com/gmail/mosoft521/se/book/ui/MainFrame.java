@@ -102,8 +102,9 @@ public class MainFrame extends JFrame {
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
 
         this.setResizable(false);
-        this.setSize(1120,740);
-        this.setVisible(true);
+        this.setSize(1150,740); //窗体大小
+        this.setLocationRelativeTo(null); //在屏幕中居中显示
+        this.setVisible(true); //显示
     }
 
     //切换各个界面

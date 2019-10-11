@@ -67,7 +67,8 @@ public class LoginFrame extends JFrame {
         this.add(down, BorderLayout.SOUTH);
         this.setBounds(300, 250, 350, 200);
         this.pack();
-        this.setVisible(true);
+        this.setLocationRelativeTo(null); //在屏幕中居中显示
+        this.setVisible(true); //显示
         this.setTitle("长江图书公司记账系统-登录");
         initListeners();
     }
