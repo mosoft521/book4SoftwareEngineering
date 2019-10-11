@@ -71,7 +71,7 @@ public class MainFrame extends JFrame {
         this.inRecordService = context.getBean("inRecordService", InRecordService.class);
 
         JMenuBar menuBar = new JMenuBar();
-        JMenu menu = new JMenu("系统");
+        JMenu menu = new JMenu("菜单");
         menuBar.add(menu);
 
         menu.add(sale).setAccelerator(KeyStroke.getKeyStroke('S', InputEvent.CTRL_MASK));
