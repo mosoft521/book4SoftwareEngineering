@@ -22,7 +22,7 @@ public class BookTypeServiceImpl implements BookTypeService {
     public List<BookType> query(String typeName) {
         BookTypeExample bookTypeExample = new BookTypeExample();
         BookTypeExample.Criteria bookTypeExampleCriteria = bookTypeExample.createCriteria();
-        bookTypeExampleCriteria.andTypeNameEqualTo(typeName);
+        bookTypeExampleCriteria.andTypeNameEqualTo("%" + typeName + "%");
         return bookTypeMapper.selectByExample(bookTypeExample);
     }
 

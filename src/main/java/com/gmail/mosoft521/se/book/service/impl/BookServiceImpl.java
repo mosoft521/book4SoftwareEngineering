@@ -84,7 +84,7 @@ public class BookServiceImpl implements BookService {
     public List<BookVO> find(String bookName) {
         BookExample bookExample = new BookExample();
         BookExample.Criteria bookExampleCriteria = bookExample.createCriteria();
-        bookExampleCriteria.andBookNameLike(bookName);
+        bookExampleCriteria.andBookNameLike("%" + bookName + "%");
         List<Book> result = bookMapper.selectByExample(bookExample);
         return setAssociate(result);
     }

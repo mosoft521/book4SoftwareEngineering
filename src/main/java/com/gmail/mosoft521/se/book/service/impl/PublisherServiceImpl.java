@@ -47,7 +47,7 @@ public class PublisherServiceImpl implements PublisherService {
     public List<Publisher> query(String pubName) {
         PublisherExample publisherExample = new PublisherExample();
         PublisherExample.Criteria publisherExampleCriteria = publisherExample.createCriteria();
-        publisherExampleCriteria.andPubNameEqualTo(pubName);
+        publisherExampleCriteria.andPubNameLike("%" + pubName + "%");
         return publisherMapper.selectByExample(publisherExample);
     }
 }
