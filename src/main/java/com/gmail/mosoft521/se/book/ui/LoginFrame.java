@@ -43,6 +43,7 @@ public class LoginFrame extends JFrame {
         up.add(Box.createHorizontalStrut(50));
         up.add(acc);
         up.add(Box.createHorizontalStrut(10));
+        accText.enableInputMethods(false); //禁用掉输入法
         up.add(accText);
         up.add(Box.createHorizontalStrut(100));
 
