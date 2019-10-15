@@ -133,10 +133,15 @@ public class InRecordServiceImpl implements InRecordService {
 
     @Override
     public void save(InRecordVO inRecordVO) {
+        Date now = new Date();
+        inRecordVO.setCreateBy(1);
+        inRecordVO.setCreateTime(now);
         inRecordMapper.insert(inRecordVO);
         for (BookInRecordVO bookInRecordVO : inRecordVO.getBookInRecordVOList()) {
             bookInRecordVO.setInRecordId(inRecordVO.getId());
             bookInRecordVO.setBookId(bookInRecordVO.getBookVO().getId());
+            bookInRecordVO.setCreateBy(1);
+            bookInRecordVO.setCreateTime(now);
             bookInRecordMapper.insert(bookInRecordVO);
             //修改书的库存
             int bookId = bookInRecordVO.getBookVO().getId();
