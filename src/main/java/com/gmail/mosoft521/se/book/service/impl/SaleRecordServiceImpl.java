@@ -140,6 +140,7 @@ public class SaleRecordServiceImpl implements SaleRecordService {
 
     @Override
     public void saveRecord(SaleRecordVO saleRecordVO) {
+        Date now = new Date();
         //遍历判断书的库存是否不够
         for (BookSaleRecordVO bookSaleRecordVO : saleRecordVO.getBookSaleRecordVOList()) {
             int bookId = bookSaleRecordVO.getBookVO().getId();
@@ -150,12 +151,16 @@ public class SaleRecordServiceImpl implements SaleRecordService {
             }
         }
         //先保存交易记录
+        saleRecordVO.setCreateBy(1);
+        saleRecordVO.setCreateTime(now);
         saleRecordMapper.insert(saleRecordVO);
         //再保存书的交易记录
         for (BookSaleRecordVO bookSaleRecordVO : saleRecordVO.getBookSaleRecordVOList()) {
             //设置销售记录id
             bookSaleRecordVO.setSaleRecordId(saleRecordVO.getId());
             bookSaleRecordVO.setBookId(bookSaleRecordVO.getBookVO().getId());
+            bookSaleRecordVO.setCreateBy(1);
+            bookSaleRecordVO.setCreateTime(now);
             bookSaleRecordMapper.insert(bookSaleRecordVO);
             //修改书的库存
             int bookId = bookSaleRecordVO.getBookVO().getId();
