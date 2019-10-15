@@ -201,7 +201,7 @@ public class BookTypePanel extends CommonPanel {
     //查询方法
     private void query(String name) {
         //通过service方法查找结果
-        Vector<BookType> types = (Vector<BookType>) bookTypeService.query(name);
+        List<BookType> types = bookTypeService.query(name);
         //转换数据格式
         Vector<Vector> datas = changeDatas(types);
         //设置数据
