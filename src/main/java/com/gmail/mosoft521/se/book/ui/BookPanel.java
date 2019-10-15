@@ -8,6 +8,8 @@ import com.gmail.mosoft521.se.book.service.BookService;
 import com.gmail.mosoft521.se.book.service.BookTypeService;
 import com.gmail.mosoft521.se.book.service.PublisherService;
 import com.gmail.mosoft521.se.book.vo.BookVO;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
 
 import javax.swing.*;
@@ -17,6 +19,7 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
@@ -27,6 +30,8 @@ import java.util.Vector;
  * 图书录入界面
  */
 public class BookPanel extends CommonPanel {
+    private static Logger LOGGER = LoggerFactory.getLogger(BookPanel.class);
+
     private BookService bookService;
     private BookTypeService bookTypeService;
     private PublisherService publisherService;
@@ -251,6 +256,13 @@ public class BookPanel extends CommonPanel {
                 query();
             }
         });
+        this.queryButton.registerKeyboardAction(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                LOGGER.info("query");
+                query();
+            }
+        }, KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), JComponent.WHEN_IN_FOCUSED_WINDOW);
         //图片上传按钮
         imageButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
