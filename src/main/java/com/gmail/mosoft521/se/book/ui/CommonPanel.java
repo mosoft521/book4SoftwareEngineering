@@ -36,7 +36,7 @@ public abstract class CommonPanel extends JPanel {
     /*
      * 将数据设置进JTable中
      */
-    public void initData() {
+    public void initDatas() {
         if (this.table == null) return;
         DefaultTableModel tableModel = (DefaultTableModel) this.table.getModel();
         //将数据设入表格Model中
@@ -49,7 +49,7 @@ public abstract class CommonPanel extends JPanel {
      * 刷新列表的方法
      */
     public void refreshTable() {
-        initData();
+        initDatas();
         getJTable().repaint();
     }
 

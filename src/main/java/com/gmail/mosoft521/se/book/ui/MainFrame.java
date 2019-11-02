@@ -85,7 +85,7 @@ public class MainFrame extends JFrame {
         this.add(salePanel);
         this.currentPanel = salePanel;
         //初始化销售界面的数据
-        this.salePanel.initData();
+        this.salePanel.initDatas();
 
         //初始化库存管理界面
         repertoryPanel = new RepertoryPanel(context);
